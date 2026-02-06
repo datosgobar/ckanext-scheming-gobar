@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 version = '3.1.0'
 
 setup(
-    name='ckanext-scheming',
+    name='ckanext-scheming-gobar',
     version=version,
     description="Easy, sharable custom CKAN schemas",
     long_description="""
@@ -18,7 +18,7 @@ setup(
     keywords='ckan',
     author='Ian Ward',
     author_email='ian@excess.org',
-    url='https://github.com/ckan/ckanext-scheming',
+    url='https://github.com/datosgobar/ckanext-scheming-gobar',
     license='MIT',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     namespace_packages=['ckanext'],
