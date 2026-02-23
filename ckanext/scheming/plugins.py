@@ -47,6 +47,7 @@ convert_from_extras = get_converter('convert_from_extras')
 DEFAULT_PRESETS = 'ckanext.scheming:presets.json'
 
 log = logging.getLogger(__name__)
+log.error(f"modulo plugins cargado")
 
 def run_once_for_caller(var_name, rval_fn):
     """
@@ -499,7 +500,9 @@ class SchemingNerfIndexPlugin(p.SingletonPlugin):
     p.implements(p.IPackageController, inherit=True)
 
     def before_dataset_index(self, data_dict):
-        return self.before_index(data_dict)
+        final_data = json.dumps(self.before_index(data_dict))
+        log.error(f"PLUGINS.PY FINAL DATA:{final_data}")
+        return final_data
 
     def before_index(self, data_dict):
         schemas = SchemingDatasetsPlugin.instance._expanded_schemas

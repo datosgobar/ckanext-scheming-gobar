@@ -10,6 +10,7 @@ from jinja2 import Environment
 from ckan.plugins.toolkit import config, _, h
 
 from ckanapi import LocalCKAN, NotFound, NotAuthorized
+from functools import lru_cache
 
 all_helpers = {}
 
@@ -232,6 +233,68 @@ def scheming_group_schemas(expanded=True):
         if expanded:
             return p.instance._expanded_schemas
         return p.instance._schemas
+
+##2 FUNCIONES AGREGADAS DE SCHEMINGDCAT
+##ninguna de las dos se usa, la primera esta comentada y devuelve none
+
+@lru_cache(maxsize=16)
+@helper
+def schemingdcat_get_icons_dir(field_tuple=None, field_name=None):
+    """
+    Returns the defined icons directory for a given scheming field definition or field name.
+
+    This function is used to retrieve the icons directory associated with a
+    specific field in a scheming dataset or directly by field name. If no icons directory is defined,
+    the function will return None.
+
+    Args:
+        field (dict, optional): A dictionary representing the scheming field definition.
+                                This should include all the properties of the field,
+                                including the icons directory if one is defined.
+        field_name (str, optional): The name of the field. If provided, the function will
+                                     look for an icons directory with this name.
+
+    Returns:
+        str: A string representing the icons directory for the field or field name.
+             If no icons directory is defined or found, the function will return None.
+    """
+    #from ckanext.scheming.plugins import SchemingDatasetsPlugin as p
+    #if field_tuple:
+    #    field = dict(field_tuple)
+    #    if "icons_dir" in field:
+    #        return field["icons_dir"]
+
+    #    if "field_name" in field:
+    #        dir = p.toolkit.config.get('ckanext.schemingdcat.icons_dir') + "/" + field["field_name"]
+    #        if public_dir_exists(dir):
+    #            return dir
+
+    #elif field_name:
+     #   dir = p.toolkit.config.get('ckanext.schemingdcat.icons_dir') + "/" + field_name
+     #   if public_dir_exists(dir):
+     #       return dir
+
+    return None
+
+#Esta segunda función requiere varias importaciones de seteos en otras partes de schemingdcat
+@lru_cache(maxsize=16)
+@helper
+def schemingdcat_get_cached_schema(dataset_type='dataset'):
+    """
+    Retrieve the cached schema for a given dataset type.
+
+    Args:
+        dataset_type (str, optional): The type of schema to retrieve. Defaults to 'dataset'.
+
+    Returns:
+        dict: The schema of the dataset instance.
+    """
+    if sdct_config.schemas is None:
+        sdct_config.schemas = scheming_get_dataset_schema() #acá cambié a scheming sólo
+
+    return sdct_config.schemas.get(dataset_type, {})
+
+## FIN DE AGREGADOS EN SCHEINGDCAT
 
 
 @helper
@@ -459,3 +522,24 @@ def scheming_missing_required_fields(pages, data=None, package_id=None):
             if f.get('required') and not data.get(f['field_name'])
         ])
     return missing
+
+
+##AGREGADOS DE SCHEMINGDCAT
+@helper
+@lru_cache(maxsize=16)
+@helper
+def schemingdcat_get_cached_schema(dataset_type='dataset'):
+    """
+    Retrieve the cached schema for a given dataset type.
+
+    Args:
+        dataset_type (str, optional): The type of schema to retrieve. Defaults to 'dataset'.
+
+    Returns:
+        dict: The schema of the dataset instance.
+    """
+    if sdct_config.schemas is None:
+        sdct_config.schemas = schemingdcat_get_dataset_schema()
+
+    return sdct_config.schemas.get(dataset_type, {})
+

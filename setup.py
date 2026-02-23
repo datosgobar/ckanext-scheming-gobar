@@ -29,6 +29,7 @@ setup(
         'ckanapi',
         'pytz',
         'six',
+        'shapely'
     ],
     entry_points=\
     """
