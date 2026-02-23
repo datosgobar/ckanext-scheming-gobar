@@ -382,6 +382,71 @@ def scheming_get_timezones(field):
 
     return to_options(pytz.common_timezones)
 
+@helper
+def schemingdcat_parse_localised_date(date_=None):
+    '''Parse a datetime object or timestamp string as a localised date.
+    If timestamp is badly formatted, then None is returned.
+
+    :param date_: the date
+    :type date_: datetime or date or ISO string format
+    :rtype: date
+    '''
+    if not date_:
+        return None
+    if isinstance(date_, str):
+        try:
+            date_ = ckan_helpers.date_str_to_datetime(date_)
+        except (TypeError, ValueError):
+            return None
+    # check we are now a datetime or date
+    if isinstance(date_, datetime.datetime):
+        date_ = date_.date()
+    elif not isinstance(date_, datetime.date):
+        return None
+
+    #HELPERS PARA VALIDADORES Y PRESETS DE TEMPORAL COVERAGE (DE SCHEMINGDCAT)
+    @helper
+    def schemingdcat_get_current_lang():
+        """
+        Returns the current language of the CKAN instance.
+
+        Returns:
+            str: The current language of the CKAN instance. If the language cannot be determined, the default language 'en' is returned.
+        """
+        try:
+            return lang()
+        except TypeError:
+            return config.get("ckan.locale_default", "en")
+
+    @helper
+    def schemingdcat_parse_localised_date(date_=None):
+        '''Parse a datetime object or timestamp string as a localised date.
+        If timestamp is badly formatted, then None is returned.
+
+        :param date_: the date
+        :type date_: datetime or date or ISO string format
+        :rtype: date
+        '''
+        if not date_:
+            return None
+        if isinstance(date_, str):
+            try:
+                date_ = ckan_helpers.date_str_to_datetime(date_)
+            except (TypeError, ValueError):
+                return None
+        # check we are now a datetime or date
+        if isinstance(date_, datetime.datetime):
+            date_ = date_.date()
+        elif not isinstance(date_, datetime.date):
+            return None
+
+        # Format date based on locale
+        locale = schemingdcat_get_current_lang()
+        if locale == 'es':
+            return date_.strftime('%d-%m-%Y')
+        else:
+            return date_.strftime('%Y-%m-%d')
+
 
 @helper
 def scheming_display_json_value(value, indent=2):

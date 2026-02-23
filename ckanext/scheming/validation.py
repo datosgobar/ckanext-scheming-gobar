@@ -226,7 +226,92 @@ def validate_date_inputs(field, key, data, extras, errors, context):
                 date = pytz.timezone(value).localize(date)
 
     return date
+#VALIDADORES DE SCHEMINGDCAT PARA TEMPORAL COVERAGE
+@scheming_validator
+@register_validator
+def schemingdcat_fill_dependent_fields(field, schema):
+    """
+    Validator that fills dependent fields based on the value of the primary field.
 
+    This validator checks if the primary field has a value and, if so, fills the dependent fields
+    specified in the `dependent_fields` attribute of the primary field. If the dependent fields
+    have subfields, it will also fill those subfields with the same value.
+
+    Args:
+        field (dict): The field definition containing the `dependent_fields` attribute.
+        schema (dict): The schema definition.
+
+    Returns:
+        function: A validator function that processes the dependent fields.
+
+    Validator Args:
+        key (tuple): The key of the field being validated.
+        data (dict): The data dictionary containing all field values.
+        errors (dict): The dictionary to collect validation errors.
+        context (dict): The context dictionary containing additional information.
+
+    Raises:
+        None: This validator does not raise exceptions but logs errors if they occur.
+    """
+
+    # log.debug('field.dependent_fields: %s', field.get('dependent_fields'))
+    def validator(key, data, errors, context):
+        dependent_fields = field.get('dependent_fields')
+
+        if not dependent_fields:
+            return validator
+
+        value = data.get(key)
+
+        if value in (missing, None, ''):
+            data[key] = None
+            return validator
+
+        dependent_field_name = dependent_fields['field_name']
+
+        schemingdcat_fill_subfields(dependent_field_name, dependent_fields, value, data)
+
+    return validator
+
+
+# Aux function to fill subfields for schemingdcat fill_dependent_fields validators
+def schemingdcat_fill_subfields(dependent_field_name, dependent_fields, value, data):
+    """
+    Fills subfields for schemingdcat fill_dependent_fields validators.
+
+    Args:
+        dependent_field_name (str): The name of the dependent field.
+        dependent_fields (dict): The dictionary containing subfields information.
+        value (any): The value to be set for the subfields.
+        data (dict): The data dictionary where the subfields will be set.
+
+    Returns:
+        None
+
+    Raises:
+        IndexError: If there is an indexing error while setting the subfield value.
+        ValueError: If there is a value error while setting the subfield value.
+        KeyError: If there is a key error while setting the subfield value.
+    """
+    dependent_key = (dependent_field_name,)
+    subfields = dependent_fields.get('subfields')
+
+    if subfields:
+        for subfield in subfields:
+            subfield_name = subfield['field_name']
+            if value:
+                dependent_subkey = (dependent_field_name, 0, subfield_name)
+                try:
+                    data[dependent_subkey] = value
+                except (IndexError, ValueError, KeyError) as e:
+                    log.error('Exception occurred while setting subfield value: %s', e)
+    else:
+        if value:
+            try:
+                data[dependent_key] = value
+            except (IndexError, ValueError, KeyError) as e:
+                log.error('Exception occurred while setting field value: %s', e)
+#
 
 @scheming_validator
 @register_validator

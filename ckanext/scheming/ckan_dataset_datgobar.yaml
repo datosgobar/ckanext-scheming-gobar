@@ -3,72 +3,432 @@ about: A reimplementation of the default CKAN dataset schema
 about_url: https://github.com/ckan/ckanext-scheming
 
 
+
+
 dataset_fields:
 
-- field_name: title
-  label: Title
+#CAMPOS DE DESCRIPCIÓN Y AUTORÍA
+#dataset title
+- field_name: dataset_title
+  display_property: dct:title
+  label: Dataset Title
+  form_placeholder: eg. Esquema AIF. Devengado
   preset: title
-  form_placeholder: eg. A descriptive title
+  help_text:
+    en: >
+      Title under which the dataset will be published.
+      It should be clear and abstract enough to cover all distributions.
+      Recommended maximum: 100 characters (200 if necessary).
+    es: >
+      Título bajo el cual se publicará el dataset.
+      Debe ser claro y lo suficientemente abstracto para abarcar todas sus distribuciones.
+      Máximo recomendado: 100 caracteres (200 si es necesario).
+  help_inline: true
+  required: true
 
+#name: url que tendrá en el portal
 - field_name: name
   label: URL
   preset: dataset_slug
   form_placeholder: eg. my-dataset
 
-- field_name: notes
-  label: Description
-  form_snippet: markdown.html
-  form_placeholder: eg. Some useful notes about the data
 
-- field_name: tag_string
-  label: Tags
+#dataset publisher name
+- field_name: owner_org
+  display_property: dct:publisher
+  label: Dataset Publisher Name
+  preset: dataset_organization
+  form_placeholder: eg. Jefatura de Gabinete de Ministros. Secretaría de Medios y Comunicación Pública.
+  help_text:
+    en: >
+      Entity responsible for publishing the dataset.
+      For organizations, use the hierarchical structure separated by dots.
+    es: >
+      Responsable de la publicación del dataset.
+      Para organizaciones, usar estructura jerárquica separada por puntos.
+  help_inline: true
+  required: true
+
+
+#dataset publisher email
+- field_name: dataset_publisher_mbox
+  label: Dataset Publisher Contact
+  display_property: dct:publisher
+  form_placeholder: correoisnt@gob.ar
+  display_snippet: email.html
+  help_text:
+    en: >
+      Contact email address of the entity responsible for publishing the dataset.
+    es: >
+      Correo electrónico de contacto del responsable de la publicación del dataset.
+  help_inline: true
+  required: false
+
+
+  #dataset description
+- field_name: dataset_description
+  display_property: dct:description
+  label: Dataset Description
+  form_placeholder: eg. Describe los componentes de ahorro, inversión, etc
+  form_snippet: markdown.html
+  help_text:
+    en: >
+      Clear and concise description of the dataset’s content.
+      Recommended maximum: 500 characters (1,500 if necessary).
+    es: >
+      Descripción clara y concisa del contenido del dataset.
+      Máximo recomendado: 500 caracteres (1.500 si es necesario).
+  help_inline: true
+  required: true
+
+#CAMPOS DE ESTADO (status, issued, modified)
+- field_name: dataset_issued
+  label: Dataset Issued
+  display_property: dct:issued
+  help_text:
+    en: >                                                                                              
+      Date when the dataset was published.                                                             
+      Use ISO 8601 format, as a date or date-time, with the highest relevant level of detail.
+    es: >                                                                                              
+      Fecha en la que se publicó el dataset.                                                           
+      Usar formato ISO 8601, como fecha o fecha con hora, con el mayor nivel de detalle relevante.
+  help_inline: true
+  required: true
+  preset: date
+
+- field_name: dataset_estado
+  label: Dataset State
+  display_property: dct:issued(???)
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: true
+  help_text:
+    en: >                                                                                              
+      Date when the dataset was published.                                                             
+      Use ISO 8601 format, as a date or date-time, with the highest relevant level of detail.
+    es: >                                                                                              
+      Fecha en la que se publicó el dataset.                                                           
+      Usar formato ISO 8601, como fecha o fecha con hora, con el mayor nivel de detalle relevante.
+  help_inline: true
+  required: true
+  choices:
+    - value: actualizado
+      label: actualizado
+    - value: desactualizado
+      label: desactualizado
+    - value: sin mantenimiento
+      label: sin mantenimiento
+
+
+
+
+#CAMPOS DE TOPICOS (supertheme, theme, keyword,hvd_category)
+- field_name: dataset_superTheme
+  label: Dataset Supertheme
+  display_property: dct:theme
+  help_text:
+    en: >
+      Global theme(s) or category(ies) the dataset belongs to.
+      Multiple values may be selected.
+      Categories follow the EU Publications Office taxonomy.
+    es: >
+      Temática(s) o categoría(s) globales a las que pertenece el dataset.
+      Se pueden seleccionar múltiples valores.
+      Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
+  help_inline: true
+  required: true
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: true
+  choices:
+    - value: http://publications.europa.eu/resource/authority/data-theme/TECH
+      label:
+        en: Technology (TECH)
+        es: Tecnología (TECH)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/ECON
+      label:
+        en: Economy and Finance (ECON)
+        es: Economía y Finanzas (ECON)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/EDUC
+      label:
+        en: Education, Culture and Sport (EDUC)
+        es: Educación, Cultura y Deporte (EDUC)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/SOCI
+      label:
+        en: Population and Society (SOCI)
+        es: Población y Sociedad (SOCI)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/ENER
+      label:
+        en: Energy (ENER)
+        es: Energía (ENER)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/GOVE
+      label:
+        en: Government and Public Sector (GOVE)
+        es: Gobierno y Sector Público (GOVE)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/JUST
+      label:
+        en: Justice, Legal System and Public Safety (JUST)
+        es: Justicia, Sistema Legal y Seguridad Pública (JUST)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/ENVI
+      label:
+        en: Environment (ENVI)
+        es: Medio Ambiente (ENVI)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/AGRI
+      label:
+        en: Agriculture, Fisheries, Forestry and Food (AGRI)
+        es: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/HEAL
+      label:
+        en: Health (HEAL)
+        es: Salud (HEAL)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/TRAN
+      label:
+        en: Transport (TRAN)
+        es: Transporte (TRAN)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/REGI
+      label:
+        en: Regions and Cities (REGI)
+        es: Regiones y Ciudades (REGI)
+
+
+
+
+  # Acá habría que implementar un tesauro propio
+#THEME
+- field_name: dataset_theme
+  label: Dataset Theme
+  display_property: dcat:theme
+  help_text:
+    es: |
+      Categorías temáticas específicas del dataset.
+      Puede seleccionarse más de una.
+      Deben usarse los ids de la taxonomía definida por la autoridad del Catálogo.
+    en: |
+      Specific thematic categories of the dataset.
+      More than one may be selected.
+      Use the ids from the taxonomy defined by the Catalog authority.
+  help_inline: true
+  required: true
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: true
+  choices:
+    - value: http://publications.europa.eu/resource/authority/data-theme/TECH
+      label:
+        en: Technology (TECH)
+        es: Tecnología (TECH)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/ECON
+      label:
+        en: Economy and Finance (ECON)
+        es: Economía y Finanzas (ECON)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/EDUC
+      label:
+        en: Education, Culture and Sport (EDUC)
+        es: Educación, Cultura y Deporte (EDUC)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/SOCI
+      label:
+        en: Population and Society (SOCI)
+        es: Población y Sociedad (SOCI)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/ENER
+      label:
+        en: Energy (ENER)
+        es: Energía (ENER)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/GOVE
+      label:
+        en: Government and Public Sector (GOVE)
+        es: Gobierno y Sector Público (GOVE)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/JUST
+      label:
+        en: Justice, Legal System and Public Safety (JUST)
+        es: Justicia, Sistema Legal y Seguridad Pública (JUST)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/ENVI
+      label:
+        en: Environment (ENVI)
+        es: Medio Ambiente (ENVI)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/AGRI
+      label:
+        en: Agriculture, Fisheries, Forestry and Food (AGRI)
+        es: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/HEAL
+      label:
+        en: Health (HEAL)
+        es: Salud (HEAL)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/TRAN
+      label:
+        en: Transport (TRAN)
+        es: Transporte (TRAN)
+
+    - value: http://publications.europa.eu/resource/authority/data-theme/REGI
+      label:
+        en: Regions and Cities (REGI)
+        es: Regiones y Ciudades (REGI)
+
+- field_name: dataset_keywords
+  help_text:
+    en: >
+      Keywords or tags describing the dataset’s title or content.
+      Use clear, well-spelled terms, preferably in plural, and consistent with existing tags.
+    es: >
+      Palabras clave o etiquetas que describen el título o el contenido del dataset.
+      Usar términos claros, bien escritos, preferentemente en plural y consistentes con etiquetas existentes.
+  help_inline: true
   preset: tag_string_autocomplete
   form_placeholder: eg. economy, mental health, government
+
+
+#CAMPOS TEMPORALES (accrualPeriodicity, temporalcoverage)
+- field_name: dataset_accrualPeriodicity
+  label: Dataset Accrual Periodicity
+  help_text:
+    en: >
+      Frequency at which the dataset is updated.
+      Use normalized ISO 8601 periods, or select “Irregular” if the frequency is not fixed.
+    es: >
+      Frecuencia con la que se actualiza el dataset.
+      Usar períodos normalizados ISO 8601 o seleccionar “eventual” si la frecuencia no es fija.
+  help_inline: true
+  required: true
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: true
+  display_property: dct:accrualPeriodicity
+  choices:
+    - value: http://publications.europa.eu/resource/authority/frequency/HOURLY
+      label: R/PT1S
+
+    - value: http://publications.europa.eu/resource/authority/frequency/HOURLY
+      label: R/PT1H
+
+    - value: http://publications.europa.eu/resource/authority/frequency/DAILY
+      label: R/P1D
+
+    - value: http://publications.europa.eu/resource/authority/frequency/WEEKLY
+      label: R/P1W
+
+    - value: http://publications.europa.eu/resource/authority/frequency/MONTHLY
+      label: R/P0.5M
+
+    - value: http://publications.europa.eu/resource/authority/frequency/MONTHLY
+      label: R/P1M
+
+    - value: http://publications.europa.eu/resource/authority/frequency/BIMONTHLY
+      label: R/P2M
+
+    - value: http://publications.europa.eu/resource/authority/frequency/QUARTERLY
+      label: R/P3M
+
+    - value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_3
+      label: R/P4M
+
+    - value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_2
+      label: R/P6M
+
+    - value: http://publications.europa.eu/resource/authority/frequency/ANNUAL
+      label: R/P1Y
+
+    - value: http://publications.europa.eu/resource/authority/frequency/BIENNIAL
+      label: R/P2Y
+
+    - value: http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL
+      label: R/P4Y
+
+    - value: http://publications.europa.eu/resource/authority/frequency/DECENNIAL
+      label: R/P10Y
+
+    - value: http://publications.europa.eu/resource/authority/frequency/IRREG
+      label: eventual
+
+- field_name: temporal_start
+  label:
+    en: Temporal extent (Start)
+    es: Cobertura temporal (Inicio)
+  dependent_fields:
+    field_name: temporal_coverage
+    subfields:
+      - field_name: start
+  display_property: dct:temporal
+  preset: date_dependent_fields
+  form_group_id: temporal_info
+
+# Temporal end (O)
+- field_name: temporal_end
+  label:
+    en: Temporal extent (End)
+    es: Cobertura temporal (Fin)
+  dependent_fields:
+    field_name: temporal_coverage
+    subfields:
+      - field_name: end
+  display_property: dct:temporal
+  preset: date_dependent_fields
+  form_group_id: temporal_info
+
+# TO MIGRATE: Temporal coverage dict. Filling with temporal_* values
+- field_name: temporal_coverage
+  label:
+    en: Temporal coverage
+    es: Cobertura temporal
+  form_snippet: null
+  display_snippet: null
+  repeating_once: true
+  repeating_subfields:
+    - field_name: start
+      legacy: temporal_start
+      label:
+        en: Temporal extent (Start)
+        es: Cobertura temporal (Inicio)
+
+    - field_name: end
+      legacy: temporal_end
+      label:
+        en: Temporal extent (End)
+        es: Cobertura temporal (Fin)
+
+  help_text:
+    en: The temporal period or periods the dataset covers.
+    es: Periodo o periodos temporales que abarca el conjunto de datos.
+
+
+#CAMPOS GEOGRÄFICOS*
+
+#CAMPOS DE FUENTES Y LICENCIA (source, license)
+
+
+
 
 - field_name: license_id
   label: License
   form_snippet: license.html
   help_text: License definitions and additional information can be found at http://opendefinition.org/
 
-- field_name: owner_org
-  label: Organization
-  preset: dataset_organization
+
 
 - field_name: url
   label: Source
   form_placeholder: http://example.com/dataset.json
   display_property: foaf:homepage
   display_snippet: link.html
-
-- field_name: version
-  label: Version
-  validators: ignore_missing unicode_safe package_version_validator
-  form_placeholder: '1.0'
-
-- field_name: author
-  label: Author
-  form_placeholder: Joe Bloggs
-  display_property: dc:creator
-
-- field_name: author_email
-  label: Author Email
-  form_placeholder: joe@example.com
-  display_property: dc:creator
-  display_snippet: email.html
-  display_email_name_field: author
-
-- field_name: maintainer
-  label: Maintainer
-  form_placeholder: Joe Bloggs
-  display_property: dc:contributor
-
-- field_name: maintainer_email
-  label: Maintainer Email
-  form_placeholder: joe@example.com
-  display_property: dc:contributor
-  display_snippet: email.html
-  display_email_name_field: maintainer
-
 
 resource_fields:
 

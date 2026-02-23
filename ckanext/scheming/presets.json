@@ -104,6 +104,14 @@
         "validators": "scheming_required isodate convert_to_json_if_date"
       }
     },
+        {
+      "preset_name": "date_dependent_fields",
+      "values": {
+        "form_snippet": "date.html",
+        "display_snippet": "date_localised.html",
+        "validators": "scheming_required isodate convert_to_json_if_date schemingdcat_fill_dependent_fields"
+      }
+        },
     {
       "preset_name": "datetime",
       "values": {
