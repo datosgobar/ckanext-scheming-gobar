@@ -389,6 +389,16 @@ class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
             )
         return bp
 
+    ###Agregado para tratamiento de campos anidados
+    #TODO:evaluar hacer otro pluggin para no modificar este
+    p.implements(p.IPackageController, inherit=True)
+
+    def before_dataset_index(self, data_dict):
+        data_dict.pop('spatial_coverage', None)
+        data_dict.pop('temporal_coverage', None)
+        return data_dict
+
+
 
 def expand_form_composite(data, fieldnames):
     """
@@ -500,9 +510,7 @@ class SchemingNerfIndexPlugin(p.SingletonPlugin):
     p.implements(p.IPackageController, inherit=True)
 
     def before_dataset_index(self, data_dict):
-        final_data = json.dumps(self.before_index(data_dict))
-        log.error(f"PLUGINS.PY FINAL DATA:{final_data}")
-        return final_data
+        return self.before_index(data_dict)
 
     def before_index(self, data_dict):
         schemas = SchemingDatasetsPlugin.instance._expanded_schemas
@@ -516,6 +524,7 @@ class SchemingNerfIndexPlugin(p.SingletonPlugin):
                 data_dict[d['field_name']] = json.dumps(data_dict[d['field_name']])
 
         return data_dict
+
 
 
 def _load_schemas(schemas, type_field):
