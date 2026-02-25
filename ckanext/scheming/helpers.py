@@ -5,14 +5,14 @@ import datetime
 import pytz
 import json
 import six
-
 from jinja2 import Environment
 from ckan.plugins.toolkit import config, _, h
-
 from ckanapi import LocalCKAN, NotFound, NotAuthorized
 from ckan.lib import helpers as ckan_helpers
 from functools import lru_cache
-
+from urllib.parse import urlparse
+from urllib.error import URLError
+prettify_cache = {}
 all_helpers = {}
 
 def helper(fn):
@@ -259,6 +259,7 @@ def schemingdcat_get_icons_dir(field_tuple=None, field_name=None):
         str: A string representing the icons directory for the field or field name.
              If no icons directory is defined or found, the function will return None.
     """
+    #TODO:¿Vamos a implementar esto? vamos a usar íconos?
     #from ckanext.scheming.plugins import SchemingDatasetsPlugin as p
     #if field_tuple:
     #    field = dict(field_tuple)
@@ -294,6 +295,45 @@ def schemingdcat_get_cached_schema(dataset_type='dataset'):
         sdct_config.schemas = scheming_get_dataset_schema() #acá cambié a scheming sólo
 
     return sdct_config.schemas.get(dataset_type, {})
+
+
+@helper
+def schemingdcat_prettify_url_name(url):
+    """
+    Prettifies a URL name by extracting the last segment and cleaning it.
+
+    Args:
+        url (str): The URL to extract the name from.
+
+    Returns:
+        str: The prettified URL name, or the original URL if an error occurred.
+    """
+    if url is None:
+        return url
+
+    # Convert url to str if it is bytes
+    if isinstance(url, bytes):
+        url = url.decode('utf-8')
+
+    if url in prettify_cache:
+        return prettify_cache[url]
+
+    try:
+        parsed_url = urlparse(url)
+
+        if '/eli/' in url:
+            prettified_url_name = format_eli_label(parsed_url)
+        else:
+            url_name = parsed_url.path.split("/")[-1].split('.')[0].replace('_', '-')
+            prettified_url_name = ' '.join(url_name.split(' ')[:4])
+
+        prettify_cache[url] = prettified_url_name
+        return prettified_url_name
+
+    except (URLError, ValueError) as e:
+        print(f"Error while prettifying URL: {e}")
+        return url
+
 
 ## FIN DE AGREGADOS EN SCHEINGDCAT
 
@@ -568,23 +608,4 @@ def scheming_missing_required_fields(pages, data=None, package_id=None):
         ])
     return missing
 
-
-##AGREGADOS DE SCHEMINGDCAT
-@helper
-@lru_cache(maxsize=16)
-@helper
-def schemingdcat_get_cached_schema(dataset_type='dataset'):
-    """
-    Retrieve the cached schema for a given dataset type.
-
-    Args:
-        dataset_type (str, optional): The type of schema to retrieve. Defaults to 'dataset'.
-
-    Returns:
-        dict: The schema of the dataset instance.
-    """
-    if sdct_config.schemas is None:
-        sdct_config.schemas = schemingdcat_get_dataset_schema()
-
-    return sdct_config.schemas.get(dataset_type, {})
 
