@@ -606,13 +606,9 @@ dataset_fields:
     es: 'Sí se selecciona un <strong>Identificador geográfico</strong> y este elemento esta vacío, se rellena automáticamente.<br><br><a href="https://boundingbox.klokantech.com" target="_blank" rel="noopener">Dibuja el BBox y copia el GEOJSON con el valor de "coordinates".</a> ej: <code>{"type": "Polygon", "coordinates": [[[-18.27, 27.54], [4.44, 27.54], [4.44, 43.85], [-18.27, 43.85], [-18.27, 27.54]]]}</code><br>Solo es necesario el diccionario "geometry" con los elementos "type" y "coordinates". Más información en <a href="http://geojson.org/geojson-spec.html#bounding-boxes" target="_blank" rel="noopener">GeoJSON bounding boxes</a>.'
   help_allow_html: True
 
-# Geographic identifier (O)
-- field_name: spatial_uri
-  label:
-    en: Geographic identifier
-    es: Identificador geográfico
-    es_AR: Identificador geográfico
-    es_419: Identificador geográfico
+#Spatial nivel internacional/nacional/regional
+- field_name: spatial_uri_level1
+  label: Identificador geográfico Nacional/Regional
   preset: select_spatial_icon_dependent_fields
   dependent_fields:
     field_name: spatial_coverage
@@ -625,6 +621,13 @@ dataset_fields:
   form_include_blank_choice: False
   choices:
     - label:
+        es: Otro
+        en: Other
+        es_AR: Otro
+        es_419: Otro
+      value: Otro
+
+    - label:
         es: Argentina
         en: Argentina
         es_AR: Argentina
@@ -632,6 +635,74 @@ dataset_fields:
       spatial: '{"type":"Polygon","coordinates":[[[-73.6,-55.1],[-53.6,-55.1],[-53.6,-21.8],[-73.6,-21.8],[-73.6,-55.1]]]}'
       value: http://dbpedia.org/resource/Argentina
 
+    - label:
+        es: Gran Buenos Aires
+        en: Greater Buenos Aires
+        es_AR: Gran Buenos Aires
+        es_419: Gran Buenos Aires
+      spatial: '{"type":"Polygon","coordinates":[[[-59.3,-35.3],[-57.5,-35.3],[-57.5,-34.2],[-59.3,-34.2],[-59.3,-35.3]]]}'
+      value: https://es.wikipedia.org/wiki/Gran_Buenos_Aires
+
+    - label:
+        es: Pampeana
+        en: Pampas Region
+        es_AR: Región Pampeana
+        es_419: Región Pampeana
+      spatial: '{"type":"Polygon","coordinates":[[[-65.5,-40.6],[-56.0,-40.6],[-56.0,-30.0],[-65.5,-30.0],[-65.5,-40.6]]]}'
+      value: https://es.wikipedia.org/wiki/Región_Pampeana
+
+    - label:
+        es: Cuyo
+        en: Cuyo Region
+        es_AR: Región de Cuyo
+        es_419: Región de Cuyo
+      spatial: '{"type":"Polygon","coordinates":[[[-70.5,-36.8],[-65.0,-36.8],[-65.0,-27.5],[-70.5,-27.5],[-70.5,-36.8]]]}'
+      value: https://es.wikipedia.org/wiki/Región_de_Cuyo
+
+    - label:
+        es: Patagonia
+        en: Patagonia
+        es_AR: Patagonia
+        es_419: Patagonia
+      spatial: '{"type":"Polygon","coordinates":[[[-73.6,-55.1],[-63.0,-55.1],[-63.0,-36.0],[-73.6,-36.0],[-73.6,-55.1]]]}'
+      value: https://es.wikipedia.org/wiki/Patagonia_argentina
+
+    - label:
+        es: Noreste
+        en: Northeast Argentina
+        es_AR: Noreste Argentino (NEA)
+        es_419: Noreste Argentino
+      spatial: '{"type":"Polygon","coordinates":[[[-62.0,-30.5],[-53.5,-30.5],[-53.5,-21.5],[-62.0,-21.5],[-62.0,-30.5]]]}'
+      value: https://es.wikipedia.org/wiki/Noreste_Argentino
+
+    - label:
+        es: Noroeste
+        en: Northwest Argentina
+        es_AR: Noroeste Argentino (NOA)
+        es_419: Noroeste Argentino
+      spatial: '{"type":"Polygon","coordinates":[[[-69.5,-29.5],[-62.0,-29.5],[-62.0,-21.5],[-69.5,-21.5],[-69.5,-29.5]]]}'
+      value: https://es.wikipedia.org/wiki/Noroeste_Argentino
+
+
+
+  # Spatial nivel provincial
+- field_name: spatial_uri_level2
+  label:
+    en: Provincial identifier
+    es: Identificador provincial
+    es_AR: Identificador provincial
+    es_419: Identificador provincial
+  preset: select_spatial_icon_dependent_fields
+  dependent_fields:
+    field_name: spatial_coverage
+    subfields:
+      - field_name: uri
+      - field_name: text
+  display_property: dct:spatial
+  select_size: 10
+  sorted_choices: False
+  form_include_blank_choice: False
+  choices:
     - label:
         es: Buenos Aires
         en: Buenos Aires Province
@@ -820,6 +891,8 @@ dataset_fields:
     en: 'Geographic coverage of the dataset.'
     es: 'Ámbito geográfico cubierto por el conjunto de datos.'
   help_allow_html: True
+
+
 
 
   # TO MIGRATE: Geographic bounding box dict. Filling with spatial_* values
