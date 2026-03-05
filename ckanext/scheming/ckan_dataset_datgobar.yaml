@@ -892,6 +892,18 @@ dataset_fields:
     es: 'Ámbito geográfico cubierto por el conjunto de datos.'
   help_allow_html: True
 
+- field_name: spatial_uri_level3
+  label: Identificador geográfico Departamental
+  preset: select_spatial_uri_level3
+  dependent_fields:
+    field_name: spatial_coverage
+    subfields:
+      - field_name: uri
+      - field_name: text
+  display_property: dct:spatial
+  select_size: 10
+  sorted_choices: False
+
 
 
 

@@ -69,6 +69,14 @@
       }
     },
     {
+      "preset_name": "select_spatial_uri_level_3",
+      "values": {
+        "form_snippet": "select_spatial_uri_level_3.html",
+        "display_snippet": "select_spatial_icon.html",
+        "validators": "ignore_missing schemingdcat_fill_spatial_uri_dependent_fields"
+      }
+    },
+     {
       "preset_name": "select_spatial_icon_dependent_fields",
       "values": {
         "form_snippet": "select_spatial_uri.html",
