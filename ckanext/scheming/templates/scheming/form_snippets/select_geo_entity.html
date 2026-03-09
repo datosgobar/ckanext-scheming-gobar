@@ -1,0 +1,11 @@
+{% set field_name = field.field_name %}
+<input type="text" id="{{ field_name }}" name="{{ field_name }}" value="{{ data[field_name] or '' }}">
+
+<script type="text/javascript">
+  $(function () {
+    // Your jQuery code here
+    $('#{{ field_name }}').on('change', function() {
+      console.log('Value changed for {{ field_name }}:', $(this).val());
+    });
+  });
+</script>
