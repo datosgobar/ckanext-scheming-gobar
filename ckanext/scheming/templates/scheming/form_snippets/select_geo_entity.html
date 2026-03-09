@@ -1,11 +1,52 @@
 {% set field_name = field.field_name %}
-<input type="text" id="{{ field_name }}" name="{{ field_name }}" value="{{ data[field_name] or '' }}">
+<select id="spatial_"
 <script src="/base/vendor/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
-  $(function () {
-    // Your jQuery code here
-    $('#{{ field_name }}').on('change', function() {
-      console.log('Value changed for {{ field_name }}:', $(this).val());
+  $(document).ready(function(){
+    //Inicializamos las provincias
+    $.ajax({
+        url: 'https://apis.datos.gob.ar/georef/api/provincias?orden=nombre&max=1000', // Servidor que devuelve JSON
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+
+            $('#field-spatial_uri_level2').empty(); // Limpiar departamentos previos
+            $('#field-spatial_uri_level2').append('<option value="">Seleccione</option>');
+
+            // Rellenar el combo de departamentos
+            $.each(data.provincias, function(key, value){
+                $('#field-spatial_uri_level2').append('<option value="'+value.id+'">'+value.nombre+'</option>');
+            });
+        }
     });
-  });
+
+
+    // Al cambiar la provincia
+    $('#field-spatial_uri_level2').change(function(){
+        var idProvincia = $(this).val();
+
+        if(idProvincia != ""){
+            // Petición AJAX para obtener departamentos
+            $.ajax({
+                url: 'https://apis.datos.gob.ar/georef/api/departamentos?orden=nombre&max=1000', // Servidor que devuelve JSON
+                type: 'GET',
+                data: {provincia: idProvincia},
+                dataType: 'json',
+                success: function(data){
+                    $('#field-spatial_uri_level3').empty(); // Limpiar departamentos previos
+                    $('#field-spatial_uri_level3').append('<option value="">Seleccione</option>');
+
+                    // Rellenar el combo de departamentos
+                    $.each(data.departamentos, function(key, value){
+                        $('#field-spatial_uri_level3').append('<option value="'+value.id+'">'+value.nombre+'</option>');
+                    });
+                }
+            });
+        }
+    });
+    $('#departamento').change(function(){
+        var idDepartamento = $(this).val();
+        alert(idDepartamento);
+    })
+});
 </script>
