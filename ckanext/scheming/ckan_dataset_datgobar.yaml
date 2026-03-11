@@ -616,7 +616,7 @@ dataset_fields:
       - field_name: uri
       - field_name: text
   display_property: dct:spatial
-  select_size: 10
+  select_size: 5
   sorted_choices: False
   form_include_blank_choice: False
   choices:
@@ -894,7 +894,7 @@ dataset_fields:
 
 - field_name: spatial_uri_level3
   label: Identificador geográfico Departamental
-  preset: select
+  preset: select_geo_entities
   choices:
     -depto1
     -depto2
