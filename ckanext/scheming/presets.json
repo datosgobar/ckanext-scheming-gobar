@@ -69,11 +69,11 @@
       }
     },
     {
-      "preset_name": "select_spatial_uri_level_3",
+      "preset_name": "select_geo_entities",
       "values": {
-        "form_snippet": "select_spatial_uri_level_3.html",
-        "display_snippet": "select_spatial_icon.html",
-        "validators": "ignore_missing schemingdcat_fill_spatial_uri_dependent_fields"
+        "form_snippet": "select.html",
+        "display_snippet": "select.html",
+        "validators": "scheming_required scheminggobar_geo_choices"
       }
     },
      {

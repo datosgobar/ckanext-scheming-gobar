@@ -85,6 +85,23 @@ def scheming_choices(field, schema):
 
     return validator
 
+@scheming_validator
+@register_validator
+def scheminggobar_geo_choices(field, schema):
+
+
+    def validator(value):
+        """
+        Este validador puede usar un helper a definir que convierta el valor recibido (id o nombre) en un
+        polígono o multipolígono y devuelva el mismo así como la URI de la entidad, se guardarían ambos
+        """
+        log.error(f"esto es lo que devuelve schemingobar_geo_choices")
+        breakpoint()
+
+        return value
+
+
+    return validator
 
 @scheming_validator
 @register_validator
@@ -369,6 +386,9 @@ def schemingdcat_fill_spatial_uri_dependent_fields(field, schema):
     """
     lang = config.get('ckan.locale_default', 'en')
     spatial_uri_choices = field['choices'] if field else []
+    log.error(f"Estas son las opciones: {spatial_uri_choices}")
+    breakpoint()
+
 
     def validator(key, data, errors, context):
         dependent_fields = field.get('dependent_fields')
