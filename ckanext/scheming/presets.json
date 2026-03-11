@@ -72,7 +72,6 @@
       "preset_name": "select_geo_entities",
       "values": {
         "form_snippet": "select.html",
-        "display_snippet": "select.html",
         "validators": "scheming_required scheminggobar_geo_choices"
       }
     },
