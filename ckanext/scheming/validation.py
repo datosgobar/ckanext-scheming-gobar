@@ -96,8 +96,6 @@ def scheminggobar_geo_choices(field, schema):
         polígono o multipolígono y devuelva el mismo así como la URI de la entidad, se guardarían ambos
         """
         log.error(f"esto es lo que devuelve schemingobar_geo_choices")
-        breakpoint()
-
         return value
 
 
@@ -386,8 +384,7 @@ def schemingdcat_fill_spatial_uri_dependent_fields(field, schema):
     """
     lang = config.get('ckan.locale_default', 'en')
     spatial_uri_choices = field['choices'] if field else []
-    log.error(f"Estas son las opciones: {spatial_uri_choices}")
-    breakpoint()
+
 
 
     def validator(key, data, errors, context):
