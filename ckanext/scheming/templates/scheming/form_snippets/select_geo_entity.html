@@ -1,52 +1,45 @@
-{% set field_name = field.field_name %}
-<select id="spatial_"
-<script src="/base/vendor/jquery.js" type="text/javascript"></script>
-<script type="text/javascript">
+{% import 'macros/form.html' as form %}
+
+{#- Opciones base: solo el placeholder, jQuery llenará el resto -#}
+{%- set options = [{'value': '', 'text': 'Seleccione'}] -%}
+
+{#- Determinar valor seleccionado actual (para edición de registros existentes) -#}
+{%- if data[field.field_name] is defined -%}
+  {%- set option_selected = data[field.field_name]|string -%}
+{%- elif field.default is defined -%}
+  {%- set option_selected = field.default|string -%}
+{%- else -%}
+  {%- set option_selected = None -%}
+{%- endif -%}
+
+{% call form.select(
+    field.field_name,
+    id='field-' + field.field_name,
+    label=h.scheming_language_text(field.label),
+    options=options,
+    selected=option_selected,
+    error=errors[field.field_name],
+    classes=field.classes if 'classes' in field else ['control-medium'],
+    attrs=dict({"class": "form-control form-select"}, **(field.get('form_attrs', {}))),
+    is_required=h.scheming_field_required(field)
+    )
+%}
+    {%- snippet 'scheming/form_snippets/help_text.html', field=field -%}
+{% endcall %}
+
+{#- Script para reseleccionar el valor guardado luego de que jQuery llene el select -#}
+{%- if option_selected -%}
+<script>
   $(document).ready(function(){
-    //Inicializamos las provincias
-    $.ajax({
-        url: 'https://apis.datos.gob.ar/georef/api/provincias?orden=nombre&max=1000', // Servidor que devuelve JSON
-        type: 'GET',
-        dataType: 'json',
-        success: function(data){
-
-            $('#field-spatial_uri_level2').empty(); // Limpiar departamentos previos
-            $('#field-spatial_uri_level2').append('<option value="">Seleccione</option>');
-
-            // Rellenar el combo de departamentos
-            $.each(data.provincias, function(key, value){
-                $('#field-spatial_uri_level2').append('<option value="'+value.id+'">'+value.nombre+'</option>');
-            });
-        }
-    });
-
-
-    // Al cambiar la provincia
-    $('#field-spatial_uri_level2').change(function(){
-        var idProvincia = $(this).val();
-
-        if(idProvincia != ""){
-            // Petición AJAX para obtener departamentos
-            $.ajax({
-                url: 'https://apis.datos.gob.ar/georef/api/departamentos?orden=nombre&max=1000', // Servidor que devuelve JSON
-                type: 'GET',
-                data: {provincia: idProvincia},
-                dataType: 'json',
-                success: function(data){
-                    $('#field-spatial_uri_level3').empty(); // Limpiar departamentos previos
-                    $('#field-spatial_uri_level3').append('<option value="">Seleccione</option>');
-
-                    // Rellenar el combo de departamentos
-                    $.each(data.departamentos, function(key, value){
-                        $('#field-spatial_uri_level3').append('<option value="'+value.id+'">'+value.nombre+'</option>');
-                    });
-                }
-            });
-        }
-    });
-    $('#departamento').change(function(){
-        var idDepartamento = $(this).val();
-        alert(idDepartamento);
-    })
-});
+    // Esperamos a que el AJAX llene el select antes de reseleccionar
+    var checkSelected = setInterval(function(){
+      var $select = $('#field-{{ field.field_name }}');
+      if ($select.find('option').length > 1) {
+        $select.val('{{ option_selected }}');
+        $select.trigger('change');
+        clearInterval(checkSelected);
+      }
+    }, 100);
+  });
 </script>
+{%- endif -%}
