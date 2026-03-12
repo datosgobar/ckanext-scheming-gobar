@@ -896,8 +896,12 @@ dataset_fields:
   label: Identificador geográfico Departamental
   preset: select_geo_entities
   choices:
-    -depto1
-    -depto2
+    - label:
+        es: placeholder 1
+        en: placeholder 1
+        es_AR: placeholder 1
+        es_419: placeholder 1
+      value: placeholder 1
   dependent_fields:
     field_name: spatial_coverage
     subfields:

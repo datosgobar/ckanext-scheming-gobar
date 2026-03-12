@@ -95,7 +95,7 @@ def scheminggobar_geo_choices(field, schema):
         Este validador puede usar un helper a definir que convierta el valor recibido (id o nombre) en un
         polígono o multipolígono y devuelva el mismo así como la URI de la entidad, se guardarían ambos
         """
-        log.error(f"esto es lo que devuelve schemingobar_geo_choices")
+        log.error(f"esto es lo que devuelve schemingobar_geo_choices{value}")
         return value
 
 
