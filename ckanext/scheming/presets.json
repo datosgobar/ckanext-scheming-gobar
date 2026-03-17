@@ -66,7 +66,7 @@
       "values": {
         "form_snippet": "json.html",
         "display_snippet": "spatial_json.html",
-        "validators": "schemingdcat_spatial_uri_validator ignore_missing scheming_valid_json_object schemingdcat_fill_spatial_dependent_fields"
+        "validators": "scheminggobar_spatial_uri_validator ignore_missing scheming_valid_json_object schemingdcat_fill_spatial_dependent_fields"
       }
     },
     {
@@ -74,26 +74,11 @@
       "values": {
         "form_snippet": "select_multiple_spatial_uri.html",
         "display_snippet": "select_multiple_spatial.html",
-        "validators": "ignore_missing schemingdcat_fill_spatial_uri_dependent_fields",
+        "validators": "ignore_missing scheminggobar_fill_spatial_uri_dependent_fields",
         "output_validators": "scheming_multiple_choice_output"
       }
     },
-    {
-      "preset_name": "select_geo_entities",
-      "values": {
-        "form_snippet": "select_geo_entity.html",
-        "display_sniṕpet": "select_geo_entity.html",
-        "validators": "scheming_required scheminggobar_geo_choices"
-      }
-    },
-    {
-      "preset_name": "select_spatial_icon_dependent_fields",
-      "values": {
-        "form_snippet": "select_spatial_uri.html",
-        "display_snippet": "select_spatial_icon.html",
-        "validators": "ignore_missing schemingdcat_fill_spatial_uri_dependent_fields"
-      }
-    },
+
     {
       "preset_name": "resource_format_autocomplete",
       "values": {
