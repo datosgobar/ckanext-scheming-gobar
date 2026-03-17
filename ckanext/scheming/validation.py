@@ -343,24 +343,114 @@ def schemingdcat_fill_subfields(dependent_field_name, dependent_fields, value, d
 @register_validator
 def schemingdcat_spatial_uri_validator(field, schema):
     """
-    Returns a validator function that checks if the 'spatial_uri' value exists in the choices. If it exists, it sets the value of the field to the value of 'spatial' in the choice and 'spatial_coverage' fields. Otherwise, it sets the value to ''.
+    Validator for the `spatial` (bounding-box) field when used together with
+    `spatial_uri` (which may now hold one or more provincial URIs).
+
+    Behaviour:
+    - If `spatial` already has a value supplied by the user, leave it untouched.
+    - If `spatial` is empty, derive it automatically from `spatial_uri`:
+        * Single URI  → use the 'spatial' polygon stored in that choice directly.
+        * Multiple URIs → compute the union of all matching polygons and return
+          the axis-aligned bounding box of that union as a GeoJSON Polygon.
+    - If no matching choice is found, set the field to `missing` (no value).
+
+    The function is deliberately tolerant: if shapely cannot merge the polygons
+    it falls back to the first valid polygon found.
 
     Args:
         field (dict): Information about the field to be updated.
         schema (dict): The schema for the field to be updated.
 
     Returns:
-        function: A validation function that can be used to update the field based on the presence of 'spatial' in the choice corresponding to 'spatial_uri'.
+        function: A validator function.
     """
     schema_data = sh.scheming_get_dataset_schema(schema['dataset_type'])
-    spatial_uri_field = next((f for f in schema_data['dataset_fields'] if f['field_name'] == 'spatial_uri'), None)
+    spatial_uri_field = next(
+        (f for f in schema_data['dataset_fields'] if f['field_name'] == 'spatial_uri'),
+        None
+    )
     choices = spatial_uri_field['choices'] if spatial_uri_field else []
 
+    def _uri_list_from_value(value):
+        """Normalise whatever spatial_uri holds into a plain list of strings."""
+        if value in (missing, None, ''):
+            return []
+        if isinstance(value, list):
+            return [v for v in value if v]
+        if isinstance(value, six.string_types):
+            stripped = value.strip()
+            if stripped.startswith('['):
+                try:
+                    parsed = json.loads(stripped)
+                    if isinstance(parsed, list):
+                        return [v for v in parsed if v]
+                except (ValueError, TypeError):
+                    pass
+            return [stripped] if stripped else []
+        return []
+
+    def _bbox_polygon_from_union(polygons):
+        """
+        Given a list of shapely geometries return the axis-aligned bounding-box
+        as a GeoJSON Polygon dict.
+        """
+        from shapely.ops import unary_union
+        try:
+            union = unary_union(polygons)
+            minx, miny, maxx, maxy = union.bounds
+        except Exception as e:
+            log.error('schemingdcat_spatial_uri_validator: union failed: %s', e)
+            # fall back to bounds of the first polygon
+            minx, miny, maxx, maxy = polygons[0].bounds
+
+        return {
+            "type": "Polygon",
+            "coordinates": [[
+                [minx, miny],
+                [maxx, miny],
+                [maxx, maxy],
+                [minx, maxy],
+                [minx, miny],
+            ]]
+        }
+
     def validator(key, data, errors, context):
-        if data[key] is missing or data[key] is None or data[key] == '':
-            spatial_uri = data.get(('spatial_uri', ))
-            choice = next((item for item in choices if item["value"] == spatial_uri), None)
-            data[key] = choice.get('spatial', '') if choice else missing
+        # Only auto-fill when the field is blank
+        if data[key] not in (missing, None, ''):
+            return
+
+        spatial_uri_raw = data.get(('spatial_uri',))
+        uri_list = _uri_list_from_value(spatial_uri_raw)
+
+        if not uri_list:
+            data[key] = missing
+            return
+
+        # Collect the GeoJSON polygon strings for every matched URI
+        matched_spatial = []
+        for uri in uri_list:
+            choice = next((c for c in choices if c.get('value') == uri), None)
+            if choice and choice.get('spatial'):
+                matched_spatial.append(choice['spatial'])
+
+        if not matched_spatial:
+            data[key] = missing
+            return
+
+        if len(matched_spatial) == 1:
+            # Single province: use the stored polygon as-is
+            data[key] = matched_spatial[0]
+            return
+
+        # Multiple provinces: compute the union bbox
+        try:
+            polygons = [shape(json.loads(s)) for s in matched_spatial]
+            bbox_geojson = _bbox_polygon_from_union(polygons)
+            data[key] = json.dumps(bbox_geojson)
+        except Exception as e:
+            log.error('schemingdcat_spatial_uri_validator: could not build union bbox: %s', e)
+            # Last resort: use the first polygon
+            data[key] = matched_spatial[0]
 
     return validator
 
@@ -369,11 +459,16 @@ def schemingdcat_spatial_uri_validator(field, schema):
 @register_validator
 def schemingdcat_fill_spatial_uri_dependent_fields(field, schema):
     """
-    Validator to fill dependent fields based on the spatial URI.
+    Validator to fill dependent fields based on one or more spatial URIs.
 
-    This validator checks if the provided spatial URI has corresponding dependent fields
-    and fills them with appropriate values. It uses the default locale to fetch the
-    language-specific text for the spatial URI.
+    Supports single and multiple selection. When multiple URIs are provided the
+    dependent field (spatial_coverage) is filled with one entry per URI, using
+    consecutive integer indices (0, 1, 2, …).
+
+    Input formats accepted for the field value:
+      - A single URI string:            "https://…?nombre=Buenos+Aires"
+      - A JSON-encoded list of strings: '["https://…", "https://…"]'
+      - A Python list of strings:       ["https://…", "https://…"]
 
     Args:
         field (dict): The field dictionary containing 'choices' and 'dependent_fields'.
@@ -385,41 +480,83 @@ def schemingdcat_fill_spatial_uri_dependent_fields(field, schema):
     lang = config.get('ckan.locale_default', 'en')
     spatial_uri_choices = field['choices'] if field else []
 
+    def _resolve_label(choice):
+        """Return the display label for a choice dict, respecting the active locale."""
+        label = choice.get('label')
+        if isinstance(label, dict):
+            return label.get(lang) or label.get('es') or next(iter(label.values()), '')
+        return label or ''
 
+    def _normalize_value(value):
+        """
+        Always return a list of URI strings regardless of how the value arrived
+        (single string, JSON-encoded list, or Python list).
+        Returns an empty list when the value is absent or blank.
+        """
+        if value in (missing, None, ''):
+            return []
+        if isinstance(value, list):
+            return [v for v in value if v]
+        if isinstance(value, six.string_types):
+            stripped = value.strip()
+            if stripped.startswith('['):
+                try:
+                    parsed = json.loads(stripped)
+                    if isinstance(parsed, list):
+                        return [v for v in parsed if v]
+                except (ValueError, TypeError):
+                    pass
+            # single URI string
+            return [stripped] if stripped else []
+        return []
 
     def validator(key, data, errors, context):
         dependent_fields = field.get('dependent_fields')
-
         if not dependent_fields:
-            return validator
+            return
 
-        value = data.get(key)
+        raw_value = data.get(key)
+        uri_list = _normalize_value(raw_value)
 
-        if value in (missing, None, ''):
+        if not uri_list:
             data[key] = None
-            return validator
+            return
 
-        value_choice = next((item for item in spatial_uri_choices if item.get('value') == value), None)
+        dependent_field_name = dependent_fields['field_name']
 
-        if value_choice:
-            label = value_choice.get('label')
+        for idx, uri in enumerate(uri_list):
+            value_choice = next(
+                (item for item in spatial_uri_choices if item.get('value') == uri),
+                None
+            )
+            if not value_choice:
+                log.warning('schemingdcat_fill_spatial_uri_dependent_fields: URI not found in choices: %s', uri)
+                continue
 
-            if isinstance(label, dict):
-                spatial_text_value = label.get(lang) or label.get('es') or next(iter(label.values()))
-            else:
-                spatial_text_value = label
+            spatial_text_value = _resolve_label(value_choice)
 
-            subfields = {
-                'uri': value,
-                'text': spatial_text_value
+            subfields_to_write = {
+                'uri': uri,
+                'text': spatial_text_value,
             }
 
-            for subfield_name, subfield_value in subfields.items():
-                subfield_dict = {
-                    'field_name': dependent_fields['field_name'],
-                    'subfields': [{'field_name': subfield_name}]
-                }
-                schemingdcat_fill_subfields(dependent_fields['field_name'], subfield_dict, subfield_value, data)
+            for subfield_name, subfield_value in subfields_to_write.items():
+                dependent_subkey = (dependent_field_name, idx, subfield_name)
+                try:
+                    data[dependent_subkey] = subfield_value
+                except (IndexError, ValueError, KeyError) as e:
+                    log.error(
+                        'schemingdcat_fill_spatial_uri_dependent_fields: '
+                        'error writing %s[%d].%s = %r: %s',
+                        dependent_field_name, idx, subfield_name, subfield_value, e
+                    )
+
+        # Serialise to a JSON list for storage.
+        # scheming_multiple_choice_output (set as output_validator in the preset)
+        # will deserialise this back to a Python list when the field is read,
+        # so the display template sees a list and 'val in data[field_name]' works.
+        # Single-value case also uses a JSON list for consistency: ["uri"].
+        data[key] = json.dumps(uri_list)
 
     return validator
 
