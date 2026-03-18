@@ -5,7 +5,7 @@ from collections import defaultdict
 import itertools
 
 import shapely
-from shapely.geometry import Polygon, shape
+from shapely.geometry import Polygon, shape, MultiPolygon
 import logging
 
 import pytz
@@ -448,6 +448,9 @@ def scheminggobar_spatial_uri_validator(field, schema):
         try:
             union = unary_union(polygons)
             geoj = shapely.to_geojson(union)
+            log.error(f"geoj es un objeto de tipo: {type(geoj)}")
+
+
             #minx, miny, maxx, maxy = union.bounds
         except Exception as e:
             log.error('schemingdcat_spatial_uri_validator: union failed: %s', e)
@@ -680,7 +683,7 @@ def schemingdcat_fill_spatial_dependent_fields(field, schema):
         try:
             value_dict = json.loads(value)
             polygon = shape(value_dict)
-            if not isinstance(polygon, Polygon):
+            if not isinstance(polygon, Polygon) and not isinstance(polygon, MultiPolygon):
                 raise ValueError("The provided GeoJSON does not represent a Polygon.")
         except (json.JSONDecodeError, ValueError) as e:
             log.error('Invalid GeoJSON value: %s', e)
