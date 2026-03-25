@@ -100,7 +100,7 @@ dataset_fields:
   form_snippet: markdown.html
   help_text:
     en: >
-      Clear and concise description of the dataset’s content. Recommended maximum: 500 characters (1,500 if necessary).
+      Clear and concise description of the dataset's content. Recommended maximum: 500 characters (1,500 if necessary).
     es: >
       Descripción clara y concisa del contenido del dataset. Máximo recomendado: 500 caracteres (1.500 si es necesario).
     es_AR: >
@@ -276,9 +276,6 @@ dataset_fields:
         es_419: Regiones y Ciudades (REGI)
 
 
-
-
-
   # Acá habría que implementar un tesauro propio
 #THEME
 - field_name: dataset_theme
@@ -404,7 +401,7 @@ dataset_fields:
     es_419: Palabras clave del dataset
   help_text:
     en: >
-      Keywords or tags describing the dataset’s title or content.
+      Keywords or tags describing the dataset's title or content.
       Use clear, well-spelled terms, preferably in plural, and consistent with existing tags.
     es: >
       Palabras clave o etiquetas que describen el título o el contenido del dataset.
@@ -465,16 +462,16 @@ dataset_fields:
   help_text:
     en: >
       Frequency at which the dataset is updated.
-      Use normalized ISO 8601 periods, or select “Irregular” if the frequency is not fixed.
+      Use normalized ISO 8601 periods, or select "Irregular" if the frequency is not fixed.
     es: >
       Frecuencia con la que se actualiza el dataset.
-      Usar períodos normalizados ISO 8601 o seleccionar “eventual” si la frecuencia no es fija.
+      Usar períodos normalizados ISO 8601 o seleccionar "eventual" si la frecuencia no es fija.
     es_AR: >
       Frecuencia con la que se actualiza el dataset.
-      Usar períodos normalizados ISO 8601 o seleccionar “eventual” si la frecuencia no es fija.
+      Usar períodos normalizados ISO 8601 o seleccionar "eventual" si la frecuencia no es fija.
     es_419: >
       Frecuencia con la que se actualiza el dataset.
-      Usar períodos normalizados ISO 8601 o seleccionar “eventual” si la frecuencia no es fija.
+      Usar períodos normalizados ISO 8601 o seleccionar "eventual" si la frecuencia no es fija.
   help_inline: true
   required: true
   preset: select
@@ -870,9 +867,6 @@ dataset_fields:
 
 #CAMPOS DE FUENTES Y LICENCIA (source, license)
 
-
-
-
 - field_name: license_id
   label:
     en: Dataset License
@@ -881,7 +875,6 @@ dataset_fields:
     es_419: Licencia del dataset
   form_snippet: license.html
   help_text: License definitions and additional information can be found at http://opendefinition.org/
-
 
 
 - field_name: dataset_source
@@ -894,21 +887,515 @@ dataset_fields:
   display_property: foaf:homepage
   display_snippet: link.html
 
+
 resource_fields:
 
-- field_name: url
-  label: URL
-  preset: resource_url_upload
+# CAMPOS OBLIGATORIOS
 
+# distribution_identifier (34) - Obligatorio
+- field_name: distribution_identifier
+  label:
+    en: Distribution Identifier
+    es: Identificador de la distribución
+    es_AR: Identificador de la distribución
+    es_419: Identificador de la distribución
+  display_property: dct:identifier
+  form_placeholder: eg. 1234-abcd-5678-efgh
+  help_text:
+    en: >
+      Unique identifier for the distribution. This identifier must be unique within the complete catalog.
+    es: >
+      Identificador único de la distribución. Este identificador debe ser único para la distribución dentro del catálogo completo.
+    es_AR: >
+      Identificador único de la distribución. Este identificador debe ser único para la distribución dentro del catálogo completo.
+    es_419: >
+      Identificador único de la distribución. Este identificador debe ser único para la distribución dentro del catálogo completo.
+  help_inline: true
+  required: false
+
+# distribution_title (35) - Obligatorio
 - field_name: name
-  label: Name
-  form_placeholder: eg. January 2011 Gold Prices
+  display_property: dct:title
+  label:
+    en: Distribution Title
+    es: Título de la distribución
+    es_AR: Título de la distribución
+    es_419: Título de la distribución
+  form_placeholder: eg. Enero 2024 - Precios al consumidor
+  help_text:
+    en: >
+      Name assigned to the distribution.
+    es: >
+      Nombre asignado a la distribución.
+    es_AR: >
+      Nombre asignado a la distribución.
+    es_419: >
+      Nombre asignado a la distribución.
+  help_inline: true
+  required: true
 
+# distribution_description (36) - Recomendado
 - field_name: description
-  label: Description
+  display_property: dct:description
+  label:
+    en: Distribution Description
+    es: Descripción de la distribución
+    es_AR: Descripción de la distribución
+    es_419: Descripción de la distribución
   form_snippet: markdown.html
-  form_placeholder: Some useful notes about the data
+  form_placeholder: eg. Archivo CSV con series mensuales de precios al consumidor desagregadas por rubro.
+  help_text:
+    en: >
+      Brief description of the distribution.
+    es: >
+      Breve descripción de la distribución.
+    es_AR: >
+      Breve descripción de la distribución.
+    es_419: >
+      Breve descripción de la distribución.
+  help_inline: true
+  required: false
 
+# distribution_downloadURL (37) - Obligatorio
+- field_name: url
+  display_property: dcat:downloadURL
+  label:
+    en: Download URL
+    es: URL de descarga
+    es_AR: URL de descarga
+    es_419: URL de descarga
+  preset: resource_url_upload
+  help_text:
+    en: >
+      URL that allows direct download of the distribution file, linking directly to a downloadable file in a given format.
+    es: >
+      URL que permite la descarga directa de la distribución del dataset, vincula directamente a un archivo descargable en un formato dado.
+    es_AR: >
+      URL que permite la descarga directa de la distribución del dataset, vincula directamente a un archivo descargable en un formato dado.
+    es_419: >
+      URL que permite la descarga directa de la distribución del dataset, vincula directamente a un archivo descargable en un formato dado.
+  help_inline: true
+  required: true
+
+# distribution_fileName (38) - Recomendado
+- field_name: distribution_fileName
+  display_property: dcat:fileName
+  label:
+    en: File Name
+    es: Nombre del archivo
+    es_AR: Nombre del archivo
+    es_419: Nombre del archivo
+  form_placeholder: eg. precios-consumidor-2024-01.csv
+  help_text:
+    en: >
+      Name of the distribution file as it is downloaded, including the format extension.
+    es: >
+      Nombre de la distribución bajo el cual se descarga un archivo que contiene los datos, incluyendo la extensión del formato.
+    es_AR: >
+      Nombre de la distribución bajo el cual se descarga un archivo que contiene los datos, incluyendo la extensión del formato.
+    es_419: >
+      Nombre de la distribución bajo el cual se descarga un archivo que contiene los datos, incluyendo la extensión del formato.
+  help_inline: true
+  required: false
+
+# distribution_format (39) - Recomendado
 - field_name: format
-  label: Format
+  display_property: dct:format
+  label:
+    en: File Format
+    es: Formato del archivo
+    es_AR: Formato del archivo
+    es_419: Formato del archivo
   preset: resource_format_autocomplete
+  help_text:
+    en: >
+      Indicates the format of the distribution file (e.g. CSV, JSON, XLS, SHP).
+    es: >
+      Indica el formato del archivo de la distribución (ej. CSV, JSON, XLS, SHP).
+    es_AR: >
+      Indica el formato del archivo de la distribución (ej. CSV, JSON, XLS, SHP).
+    es_419: >
+      Indica el formato del archivo de la distribución (ej. CSV, JSON, XLS, SHP).
+  help_inline: true
+  required: false
+
+# distribution_accessURL (40) - Obligatorio
+- field_name: distribution_accessURL
+  display_property: dcat:accessURL
+  label:
+    en: Access URL
+    es: URL de acceso
+    es_AR: URL de acceso
+    es_419: URL de acceso
+  form_placeholder: eg. https://datos.gob.ar/dataset/mi-dataset
+  display_snippet: link.html
+  help_text:
+    en: >
+      URL providing access to the distribution of the dataset, such as a dataset reference or landing page.
+    es: >
+      URL que permite el acceso a la distribución del dataset, como la página de referencia del dataset.
+    es_AR: >
+      URL que permite el acceso a la distribución del dataset, como la página de referencia del dataset.
+    es_419: >
+      URL que permite el acceso a la distribución del dataset, como la página de referencia del dataset.
+  help_inline: true
+  required: true
+
+# distribution_mediaType (41) - Opcional
+- field_name: distribution_mediaType
+  display_property: dcat:mediaType
+  label:
+    en: Media Type
+    es: Tipo de archivo (IANA)
+    es_AR: Tipo de archivo (IANA)
+    es_419: Tipo de archivo (IANA)
+  form_placeholder: eg. text/csv
+  help_text:
+    en: >
+      Indicates the media type of the distribution file, only if defined by IANA (https://www.iana.org/assignments/media-types/media-types.xml).
+    es: >
+      Indica el tipo de archivo de la distribución, sólo si este está definido por IANA (https://www.iana.org/assignments/media-types/media-types.xml).
+    es_AR: >
+      Indica el tipo de archivo de la distribución, sólo si este está definido por IANA (https://www.iana.org/assignments/media-types/media-types.xml).
+    es_419: >
+      Indica el tipo de archivo de la distribución, sólo si este está definido por IANA (https://www.iana.org/assignments/media-types/media-types.xml).
+  help_inline: true
+  required: false
+
+# distribution_license (42) - Recomendado / Obligatorio (Consulta Pública)
+- field_name: distribution_license
+  display_property: dct:license
+  label:
+    en: Distribution License
+    es: Licencia de la distribución
+    es_AR: Licencia de la distribución
+    es_419: Licencia de la distribución
+  form_placeholder: eg. https://creativecommons.org/licenses/by/4.0/
+  display_snippet: link.html
+  help_text:
+    en: >
+      License under which the distribution is available, as a link to the license document or as the textual title
+      of the license as it appears at https://opendefinition.org/licenses/.
+    es: >
+      Licencia bajo la cual la distribución está disponible, mediante un enlace a la licencia o mediante el título
+      textual de la licencia tal como aparece en https://opendefinition.org/licenses/.
+    es_AR: >
+      Licencia bajo la cual la distribución está disponible, mediante un enlace a la licencia o mediante el título
+      textual de la licencia tal como aparece en https://opendefinition.org/licenses/.
+    es_419: >
+      Licencia bajo la cual la distribución está disponible, mediante un enlace a la licencia o mediante el título
+      textual de la licencia tal como aparece en https://opendefinition.org/licenses/.
+  help_inline: true
+  required: true
+
+# distribution_byteSize (43) - Opcional
+- field_name: distribution_byteSize
+  display_property: dcat:byteSize
+  label:
+    en: File Size (bytes)
+    es: Tamaño del archivo (bytes)
+    es_AR: Tamaño del archivo (bytes)
+    es_419: Tamaño del archivo (bytes)
+  form_placeholder: eg. 1024000
+  help_text:
+    en: >
+      Size of the distribution in bytes.
+    es: >
+      Tamaño de la distribución en bytes.
+    es_AR: >
+      Tamaño de la distribución en bytes.
+    es_419: >
+      Tamaño de la distribución en bytes.
+  help_inline: true
+  required: false
+
+# distribution_issued (44) - Obligatorio
+- field_name: distribution_issued
+  display_property: dct:issued
+  label:
+    en: Distribution Issue Date
+    es: Fecha de publicación de la distribución
+    es_AR: Fecha de publicación de la distribución
+    es_419: Fecha de publicación de la distribución
+  preset: date
+  help_text:
+    en: >
+      Publication date of the distribution. Use ISO 8601 format.
+    es: >
+      Fecha de publicación de la distribución. Usar formato ISO 8601.
+    es_AR: >
+      Fecha de publicación de la distribución. Usar formato ISO 8601.
+    es_419: >
+      Fecha de publicación de la distribución. Usar formato ISO 8601.
+  help_inline: true
+  required: true
+
+# distribution_modified (45) - Recomendado / Obligatorio (Consulta Pública)
+- field_name: distribution_modified
+  display_property: dct:modified
+  label:
+    en: Last Modified Date
+    es: Fecha de última modificación
+    es_AR: Fecha de última modificación
+    es_419: Fecha de última modificación
+  preset: date
+  help_text:
+    en: >
+      Date of last update or modification of the distribution. Use ISO 8601 format.
+    es: >
+      Fecha de última actualización o modificación de la distribución. Usar formato ISO 8601.
+    es_AR: >
+      Fecha de última actualización o modificación de la distribución. Usar formato ISO 8601.
+    es_419: >
+      Fecha de última actualización o modificación de la distribución. Usar formato ISO 8601.
+  help_inline: true
+  required: true
+
+# distribution_rights (46) - Opcional
+- field_name: distribution_rights
+  display_property: dct:rights
+  label:
+    en: Distribution Rights
+    es: Derechos sobre la distribución
+    es_AR: Derechos sobre la distribución
+    es_419: Derechos sobre la distribución
+  form_snippet: markdown.html
+  form_placeholder: eg. Uso permitido con atribución al organismo publicador.
+  help_text:
+    en: >
+      Information about rights applicable to the distribution that have not been specified in the license.
+    es: >
+      Información sobre derechos aplicables a la distribución que no se hayan especificado en la licencia.
+    es_AR: >
+      Información sobre derechos aplicables a la distribución que no se hayan especificado en la licencia.
+    es_419: >
+      Información sobre derechos aplicables a la distribución que no se hayan especificado en la licencia.
+  help_inline: true
+  required: false
+
+# distribution_type (47) - Recomendado / Obligatorio (Nueva Propuesta)
+- field_name: distribution_type
+  display_property: dct:type
+  label:
+    en: Distribution Type
+    es: Tipo de distribución
+    es_AR: Tipo de distribución
+    es_419: Tipo de distribución
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: true
+  help_text:
+    en: >
+      Indicates the type of resource.
+    es: >
+      Indica el tipo de recurso.
+    es_AR: >
+      Indica el tipo de recurso.
+    es_419: >
+      Indica el tipo de recurso.
+  help_inline: true
+  required: true
+  choices:
+    - value: http://www.w3.org/ns/dcat#Distribution
+      label:
+        en: File (downloadable)
+        es: Archivo (descargable)
+        es_AR: Archivo (descargable)
+        es_419: Archivo (descargable)
+    - value: http://rdfs.org/ns/void#Dataset
+      label:
+        en: API / Web service
+        es: API / Servicio web
+        es_AR: API / Servicio web
+        es_419: API / Servicio web
+    - value: http://www.w3.org/2006/vcard/ns#URL
+      label:
+        en: Link (reference page)
+        es: Enlace (página de referencia)
+        es_AR: Enlace (página de referencia)
+        es_419: Enlace (página de referencia)
+
+# character_set (48) - Recomendado (Consulta Pública)
+- field_name: character_set
+  display_property: cnt:characterEncoding
+  label:
+    en: Character Set
+    es: Conjunto de caracteres
+    es_AR: Conjunto de caracteres
+    es_419: Conjunto de caracteres
+  form_placeholder: eg. UTF-8
+  help_text:
+    en: >
+      Full name of the character encoding standard used for the resource.
+    es: >
+      Nombre completo del estándar de codificación de caracteres usado para el recurso.
+    es_AR: >
+      Nombre completo del estándar de codificación de caracteres usado para el recurso.
+    es_419: >
+      Nombre completo del estándar de codificación de caracteres usado para el recurso.
+  help_inline: true
+  required: false
+
+# status (49) - Obligatorio (Consulta Pública)
+- field_name: distribution_status
+  display_property: adms:status
+  label:
+    en: Distribution Status
+    es: Estado de la distribución
+    es_AR: Estado de la distribución
+    es_419: Estado de la distribución
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: true
+  help_text:
+    en: >
+      Status of the associated resource.
+    es: >
+      Estado del recurso asociado.
+    es_AR: >
+      Estado del recurso asociado.
+    es_419: >
+      Estado del recurso asociado.
+  help_inline: true
+  required: true
+  choices:
+    - value: http://purl.org/adms/status/Completed
+      label:
+        en: Complete
+        es: Completo
+        es_AR: Completo
+        es_419: Completo
+    - value: http://purl.org/adms/status/historicalArchive
+      label:
+        en: Historical archive
+        es: Archivo histórico
+        es_AR: Archivo histórico
+        es_419: Archivo histórico
+    - value: http://purl.org/adms/status/Deprecated
+      label:
+        en: Obsolete
+        es: Obsoleto
+        es_AR: Obsoleto
+        es_419: Obsoleto
+    - value: http://purl.org/adms/status/UnderDevelopment
+      label:
+        en: In progress
+        es: En curso
+        es_AR: En curso
+        es_419: En curso
+    - value: http://purl.org/adms/status/Planned
+      label:
+        en: Planned
+        es: Planeado
+        es_AR: Planeado
+        es_419: Planeado
+    - value: http://purl.org/adms/status/Required
+      label:
+        en: Required
+        es: Requerido
+        es_AR: Requerido
+        es_419: Requerido
+    - value: http://purl.org/adms/status/Withdrawn
+      label:
+        en: Discontinued
+        es: Discontinuado
+        es_AR: Discontinuado
+        es_419: Discontinuado
+    - value: http://purl.org/adms/status/inDevelopment
+      label:
+        en: In development
+        es: En desarrollo
+        es_AR: En desarrollo
+        es_419: En desarrollo
+
+# CAMPOS GEOESPACIALES DE DISTRIBUCIÓN
+
+# escala (50) - Recomendado (Consulta Pública)
+- field_name: distribution_scale
+  display_property: dcat:spatialResolutionInMeters
+  label:
+    en: Scale
+    es: Escala
+    es_AR: Escala
+    es_419: Escala
+  form_placeholder: eg. 1:50000
+  help_text:
+    en: >
+      Relationship between the actual dimension of objects and their possible graphical representations
+      through remote sensing or digitization.
+    es: >
+      Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
+      a través de la teledetección o bien de la digitalización.
+    es_AR: >
+      Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
+      a través de la teledetección o bien de la digitalización.
+    es_419: >
+      Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
+      a través de la teledetección o bien de la digitalización.
+  help_inline: true
+  required: false
+
+# proyección (51) - Recomendado (Consulta Pública)
+- field_name: distribution_projection
+  display_property: dct:conformsTo
+  label:
+    en: Projection
+    es: Proyección
+    es_AR: Proyección
+    es_419: Proyección
+  form_placeholder: eg. EPSG:4326 (WGS84)
+  help_text:
+    en: >
+      Identifies the reference system used.
+    es: >
+      Identifica el sistema de referencia usado.
+    es_AR: >
+      Identifica el sistema de referencia usado.
+    es_419: >
+      Identifica el sistema de referencia usado.
+  help_inline: true
+  required: false
+
+# URL a metadatos ISO 19115 (52) - Recomendado (Consulta Pública)
+- field_name: distribution_iso19115_url
+  display_property: dct:conformsTo
+  label:
+    en: ISO 19115 Metadata URL
+    es: URL a metadatos según ISO 19115
+    es_AR: URL a metadatos según ISO 19115
+    es_419: URL a metadatos según ISO 19115
+  form_placeholder: eg. https://catalogo.ejemplo.gob.ar/metadatos/capa-xyz
+  display_snippet: link.html
+  help_text:
+    en: >
+      Web address to access the metadata catalog of the geographic object.
+    es: >
+      Dirección web de acceso al catálogo de metadatos del objeto geográfico.
+    es_AR: >
+      Dirección web de acceso al catálogo de metadatos del objeto geográfico.
+    es_419: >
+      Dirección web de acceso al catálogo de metadatos del objeto geográfico.
+  help_inline: true
+  required: false
+
+# Link a geoservicio WFS (53) - Recomendado (Consulta Pública)
+- field_name: distribution_wfs_url
+  display_property: dcat:accessService
+  label:
+    en: WFS Geoservice URL
+    es: Link a geoservicio WFS
+    es_AR: Link a geoservicio WFS
+    es_419: Link a geoservicio WFS
+  form_placeholder: eg. https://geoserver.ejemplo.gob.ar/wfs?service=WFS&request=GetCapabilities
+  display_snippet: link.html
+  help_text:
+    en: >
+      Connection URL to the WFS geoservice where the present layer can be found.
+    es: >
+      URL de conexión a geoservicio WFS en el que se puede encontrar la presente capa.
+    es_AR: >
+      URL de conexión a geoservicio WFS en el que se puede encontrar la presente capa.
+    es_419: >
+      URL de conexión a geoservicio WFS en el que se puede encontrar la presente capa.
+  help_inline: true
+  required: false
