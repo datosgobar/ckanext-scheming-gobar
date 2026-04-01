@@ -492,7 +492,8 @@ def scheminggobar_spatial_uri_validator(field, schema):
         try:
             polygons = [shape(json.loads(s)) for s in matched_spatial]
             bbox_geojson = _polygon_from_union(polygons)
-            data[key] = json.dumps(bbox_geojson)
+            #data[key] = json.dumps(bbox_geojson)
+            data[key] = bbox_geojson
         except Exception as e:
             log.error('scheminggobar_spatial_uri_validator: could not build union bbox: %s', e)
             # Last resort: use the first polygon
