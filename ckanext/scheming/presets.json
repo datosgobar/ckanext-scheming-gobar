@@ -124,6 +124,15 @@
         "validators": "scheming_required isodate convert_to_json_if_date"
       }
     },
+      {
+      "preset_name": "end_date",
+      "values": {
+        "form_snippet": "date.html",
+        "display_snippet": "date.html",
+        "validators": "scheming_required isodate convert_to_json_if_date scheminggobar_larger_than_start"
+      }
+    },
+
     {
       "preset_name": "date_dependent_fields",
       "values": {

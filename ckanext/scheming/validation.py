@@ -747,6 +747,27 @@ def scheming_isodatetime(field, schema):
 
     return validator
 
+@scheming_validator
+@register_validator
+def scheminggobar_larger_than_start(field, schema):
+    def validator(key, data, errors, context):
+        end_date = data[key]
+
+        if end_date:
+            start_value = data.get(('temporal_start',))
+            if start_value:
+                try:
+                    start_date = (
+                        start_value if isinstance(start_value, datetime.datetime)
+                        else h.date_str_to_datetime(start_value)
+                    )
+                    if end_date <= start_date:
+                        raise Invalid(_('End date must be greater than start date'))
+                except (TypeError, ValueError):
+                    pass
+
+    return validator
+
 
 @scheming_validator
 @register_validator
