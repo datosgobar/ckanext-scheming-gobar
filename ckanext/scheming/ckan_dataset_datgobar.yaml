@@ -32,7 +32,7 @@ dataset_fields:
       Título bajo el cual se publicará el dataset. Debe ser claro y lo suficientemente abstracto para abarcar todas sus distribuciones.
       Máximo recomendado: 100 caracteres (200 si es necesario).
     es_419: >
-      Título bajo el cual se publicará el dataset. Debe ser claro y lo suficientemente abstracto para abarcar todas sus distribuciones.
+      Título bajo el cual se publicará el dataset. Debe ser claro y lo suficientemente abstracto para abarcar todas sus distribuciones. 
       Máximo recomendado: 100 caracteres (200 si es necesario).
   help_inline: true
   required: true
@@ -56,13 +56,13 @@ dataset_fields:
   form_placeholder: eg. Jefatura de Gabinete de Ministros. Secretaría de Medios y Comunicación Pública.
   help_text:
     en: >
-      Entity responsible for publishing the dataset. For organizations, use the hierarchical structure separated by dots.
+      Entity responsible for publishing the dataset.
     es: >
-      Responsable de la publicación del dataset. Para organizaciones, usar estructura jerárquica separada por puntos.
+      Organismo responsable de la publicación del dataset.
     es_AR: >
-      Responsable de la publicación del dataset. Para organizaciones, usar estructura jerárquica separada por puntos.
+      Organismo responsable de la publicación del dataset.
     es_419: >
-      Responsable de la publicación del dataset. Para organizaciones, usar estructura jerárquica separada por puntos.
+      Organismo responsable de la publicación del dataset.
   help_inline: true
   required: true
 
@@ -78,14 +78,10 @@ dataset_fields:
   form_placeholder: correoisnt@gob.ar
   display_snippet: email.html
   help_text:
-    en: >
-      Contact email address of the entity responsible for publishing the dataset.
-    es: >
-      Correo electrónico de contacto del responsable de la publicación del dataset.
-    es_AR: >
-      Correo electrónico de contacto del responsable de la publicación del dataset.
-    es_419: >
-      Correo electrónico de contacto del responsable de la publicación del dataset.
+    en: "Contact email address of the entity responsible for publishing the dataset."
+    es: "Correo electrónico del responsable de la publicación del dataset."
+    es_AR: "Correo electrónico del responsable de la publicación del dataset."
+    es_419: "Correo electrónico del responsable de la publicación del dataset."
   help_inline: true
   required: false
 
@@ -127,13 +123,13 @@ dataset_fields:
   display_property: dct:issued
   help_text:
     en: >
-      Date when the dataset was published. Use ISO 8601 format, as a date or date-time, with the highest relevant level of detail.
+      Date when the dataset was published.
     es: >
-      Fecha en la que se publicó el dataset. Usar formato ISO 8601, como fecha o fecha con hora, con el mayor nivel de detalle relevante.
+      Fecha en la que se publicó el dataset.
     es_AR: >
-      Fecha en la que se publicó el dataset. Usar formato ISO 8601, como fecha o fecha con hora, con el mayor nivel de detalle relevante.
+      Fecha en la que se publicó el dataset.
     es_419: >
-      Fecha en la que se publicó el dataset. Usar formato ISO 8601, como fecha o fecha con hora, con el mayor nivel de detalle relevante.
+      Fecha en la que se publicó el dataset.
   help_inline: true
   required: true
   preset: date
@@ -150,11 +146,11 @@ dataset_fields:
     en: >
       Date of last update or modification of the dataset (either its data or its metadata). Use ISO 8601 format.
     es: >
-      Fecha de última actualización o modificación del dataset (ya sea de sus datos o de sus metadatos). Usar formato ISO 8601.
+      Fecha de última actualización o modificación del dataset. Próximamente esta se computará de manera automática y no por carga de usuario.
     es_AR: >
-      Fecha de última actualización o modificación del dataset (ya sea de sus datos o de sus metadatos). Usar formato ISO 8601.
+      Fecha de última actualización o modificación del dataset. Próximamente esta se computará de manera automática y no por carga de usuario.
     es_419: >
-      Fecha de última actualización o modificación del dataset (ya sea de sus datos o de sus metadatos). Usar formato ISO 8601.
+      Fecha de última actualización o modificación del dataset. Próximamente esta se computará de manera automática y no por carga de usuario.
   help_inline: true
   required: true
   preset: date
@@ -174,11 +170,11 @@ dataset_fields:
     en: >
       Update status of the dataset.
     es: >
-      Estado de actualización en que se encuentra el dataset.
+      Estado de actualización en que se encuentra el dataset. Próximamente permitirá carga a mano así como modificación automática.
     es_AR: >
-      Estado de actualización en que se encuentra el dataset.
+      Estado de actualización en que se encuentra el dataset. Próximamente permitirá carga a mano así como modificación automática.
     es_419: >
-      Estado de actualización en que se encuentra el dataset.
+      Estado de actualización en que se encuentra el dataset. Próximamente permitirá carga a mano así como modificación automática.
   help_inline: true
   required: true
   choices:
@@ -207,23 +203,26 @@ dataset_fields:
   display_property: dct:theme
   help_text:
     en: >
-      Global theme(s) or category(ies) the dataset belongs to. Multiple values may be selected.
-      Categories follow the EU Publications Office taxonomy.
+      Global theme(s) or category(ies) the dataset belongs to. Categories follow the EU Publications Office taxonomy.
     es: >
-      Temática(s) o categoría(s) globales a las que pertenece el dataset. Se pueden seleccionar múltiples valores.
-      Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
+      Temática(s) o categoría(s) globales a las que pertenece el dataset. Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
     es_AR: >
-      Temática(s) o categoría(s) globales a las que pertenece el dataset. Se pueden seleccionar múltiples valores.
-      Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
+      Temática(s) o categoría(s) globales a las que pertenece el dataset. Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
     es_419: >
-      Temática(s) o categoría(s) globales a las que pertenece el dataset. Se pueden seleccionar múltiples valores.
-      Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
+      Temática(s) o categoría(s) globales a las que pertenece el dataset. Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
   help_inline: true
   required: true
   preset: select
   form_include_blank_choice: true
   sorted_choices: true
   choices:
+    - value: Sin tema
+      label:
+        en: No theme
+        es: Sin tema
+        es_AR: Sin tema
+        es_419: Sin tema
+
     - value: http://publications.europa.eu/resource/authority/data-theme/TECH
       label:
         en: Technology (TECH)
@@ -320,111 +319,38 @@ dataset_fields:
     es_419: Tema específico del dataset
   display_property: dcat:theme
   help_text:
-    es: |
-      Categorías temáticas específicas del dataset.
-      Puede seleccionarse más de una.
-      Deben usarse los ids de la taxonomía definida por la autoridad del Catálogo.
-    es_AR: |
-      Categorías temáticas específicas del dataset.
-      Puede seleccionarse más de una.
-      Deben usarse los ids de la taxonomía definida por la autoridad del Catálogo.
-    es_419: |
-      Categorías temáticas específicas del dataset.
-      Puede seleccionarse más de una.
-      Deben usarse los ids de la taxonomía definida por la autoridad del Catálogo.
-    en: |
-      Specific thematic categories of the dataset.
-      More than one may be selected.
-      Use the ids from the taxonomy defined by the Catalog authority.
+    es: "Categorías temáticas específicas del dataset.Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción."
+    es_AR: "Categorías temáticas específicas del dataset.Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción."
+    es_419: "Categorías temáticas específicas del dataset.Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción."
+    en: "Specific thematic categories of the dataset.Use the ids from the taxonomy defined by the Catalog authority."
   help_inline: true
   required: true
   preset: select
   form_include_blank_choice: true
   sorted_choices: true
   choices:
-    - value: http://publications.europa.eu/resource/authority/data-theme/TECH
+    - value: Tema específico 1
       label:
-        en: Technology (TECH)
-        es: Tecnología (TECH)
-        es_AR: Tecnología (TECH)
-        es_419: Tecnología (TECH)
+        en: Specific theme 1
+        es: Tema específico 1
+        es_AR: Tema específico 1
+        es_419: Tema específico 1
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/ECON
+    - value: Tema específico 2
       label:
-        en: Economy and Finance (ECON)
-        es: Economía y Finanzas (ECON)
-        es_AR: Economía y Finanzas (ECON)
-        es_419: Economía y Finanzas (ECON)
+        en: Specific theme 2
+        es: Tema específico 2
+        es_AR: Tema específico 2
+        es_419: Tema específico 2
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/EDUC
+    - value: Tema específico 3
       label:
-        en: Education, Culture and Sport (EDUC)
-        es: Educación, Cultura y Deporte (EDUC)
-        es_AR: Educación, Cultura y Deporte (EDUC)
-        es_419: Educación, Cultura y Deporte (EDUC)
+        en: Specific theme 3
+        es: Tema específico 3
+        es_AR: Tema específico 3
+        es_419: Tema específico 3
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/SOCI
-      label:
-        en: Population and Society (SOCI)
-        es: Población y Sociedad (SOCI)
-        es_AR: Población y Sociedad (SOCI)
-        es_419: Población y Sociedad (SOCI)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/ENER
-      label:
-        en: Energy (ENER)
-        es: Energía (ENER)
-        es_AR: Energía (ENER)
-        es_419: Energía (ENER)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/GOVE
-      label:
-        en: Government and Public Sector (GOVE)
-        es: Gobierno y Sector Público (GOVE)
-        es_AR: Gobierno y Sector Público (GOVE)
-        es_419: Gobierno y Sector Público (GOVE)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/JUST
-      label:
-        en: Justice, Legal System and Public Safety (JUST)
-        es: Justicia, Sistema Legal y Seguridad Pública (JUST)
-        es_AR: Justicia, Sistema Legal y Seguridad Pública (JUST)
-        es_419: Justicia, Sistema Legal y Seguridad Pública (JUST)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/ENVI
-      label:
-        en: Environment (ENVI)
-        es: Medio Ambiente (ENVI)
-        es_AR: Medio Ambiente (ENVI)
-        es_419: Medio Ambiente (ENVI)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/AGRI
-      label:
-        en: Agriculture, Fisheries, Forestry and Food (AGRI)
-        es: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
-        es_AR: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
-        es_419: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/HEAL
-      label:
-        en: Health (HEAL)
-        es: Salud (HEAL)
-        es_AR: Salud (HEAL)
-        es_419: Salud (HEAL)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/TRAN
-      label:
-        en: Transport (TRAN)
-        es: Transporte (TRAN)
-        es_AR: Transporte (TRAN)
-        es_419: Transporte (TRAN)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/REGI
-      label:
-        en: Regions and Cities (REGI)
-        es: Regiones y Ciudades (REGI)
-        es_AR: Regiones y Ciudades (REGI)
-        es_419: Regiones y Ciudades (REGI)
 
 
 # dataset_keywords | dcat:keyword | Perfil datos.gob.ar #24 | OBLIGATORIO (cambio: era Recomendado)
@@ -468,11 +394,11 @@ dataset_fields:
     en: >
       High-value category to which the dataset belongs.
     es: >
-      Categoría de alto valor a la que pertenece el dataset.
+      Categoría de alto valor a la que pertenece el dataset. Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción.
     es_AR: >
-      Categoría de alto valor a la que pertenece el dataset.
+      Categoría de alto valor a la que pertenece el dataset. Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción.
     es_419: >
-      Categoría de alto valor a la que pertenece el dataset.
+      Categoría de alto valor a la que pertenece el dataset. Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción.
   help_inline: true
   required: true
   choices:
@@ -506,14 +432,11 @@ dataset_fields:
       Frequency at which the dataset is updated.
       Use normalized ISO 8601 periods, or select "Irregular" if the frequency is not fixed.
     es: >
-      Frecuencia con la que se actualiza el dataset.
-      Usar períodos normalizados ISO 8601 o seleccionar "eventual" si la frecuencia no es fija.
+      Frecuencia con la que se actualiza el dataset. Usar "eventual" si la frecuencia no es fija.
     es_AR: >
-      Frecuencia con la que se actualiza el dataset.
-      Usar períodos normalizados ISO 8601 o seleccionar "eventual" si la frecuencia no es fija.
+      Frecuencia con la que se actualiza el dataset. Usar"eventual" si la frecuencia no es fija.
     es_419: >
-      Frecuencia con la que se actualiza el dataset.
-      Usar períodos normalizados ISO 8601 o seleccionar "eventual" si la frecuencia no es fija.
+      Frecuencia con la que se actualiza el dataset. Usar "eventual" si la frecuencia no es fija.
   help_inline: true
   required: true
   preset: select
@@ -575,6 +498,16 @@ dataset_fields:
     es_419: Cobertura temporal (Inicio)
   display_property: dct:temporal
   preset: date
+  help_text:
+    en: >
+      Date at which the data starts.
+    es: >
+      Fecha a partir de la cual hay datos.
+    es_AR: >
+      Fecha a partir de la cual hay datos.
+    es_419: >
+      Fecha a partir de la cual hay datos.
+  help_inline: true
 
 # temporal_end | dct:temporal / dcat:endDate | Perfil datos.gob.ar #30 (fin) | RECOMENDADO
 - field_name: temporal_end
@@ -585,6 +518,16 @@ dataset_fields:
     es_419: Cobertura temporal (Fin)
   display_property: dct:temporal
   preset: end_date
+  help_text:
+    en: >
+      Date at which the data starts.
+    es: >
+      Última fecha para la que hay datos.
+    es_AR: >
+      Última fecha para la que hay datos.
+    es_419: >
+      Última fecha para la que hay datos.
+  help_inline: true
 # ===========================================================================
 # CAMPOS GEOGRÁFICOS
 # ===========================================================================
@@ -606,8 +549,10 @@ dataset_fields:
       - field_name: centroid
   form_placeholder: '{"type": "Polygon", "coordinates": [[[-18.27, 27.54], [4.44, 27.54], [4.44, 43.85], [-18.27, 43.85], [-18.27, 27.54]]]}'
   help_text:
-    en: 'If a <strong>Geographic identifier</strong> is selected and this element is empty, it will be filled in automatically.<a href="https://boundingbox.klokantech.com" target="_blank" rel="noopener">Draw BBox and copy GEOJSON with "coordinates" value..</a> e.g. <code>{"type": "Polygon", "coordinates": [[[-18.27, 27.54], [4.44, 27.54], [4.44, 43.85], [-18.27, 43.85], [-18.27, 27.54]]]}</code><br>Only "geometry" dict with "type" and "coordinates" elements. More information at <a href="http://geojson.org/geojson-spec.html#bounding-boxes" target="_blank" rel="noopener">GeoJSON bounding boxes</a>.'
-    es: 'Sí se selecciona un <strong>Identificador geográfico</strong> y este elemento esta vacío, se rellena automáticamente.<br><br><a href="https://boundingbox.klokantech.com" target="_blank" rel="noopener">Dibuja el BBox y copia el GEOJSON con el valor de "coordinates".</a> ej: <code>{"type": "Polygon", "coordinates": [[[-18.27, 27.54], [4.44, 27.54], [4.44, 43.85], [-18.27, 43.85], [-18.27, 27.54]]]}</code><br>Solo es necesario el diccionario "geometry" con los elementos "type" y "coordinates". Más información en <a href="http://geojson.org/geojson-spec.html#bounding-boxes" target="_blank" rel="noopener">GeoJSON bounding boxes</a>.'
+    en: 'If a <strong>Geographic identifier</strong> (next field) is selected and this element is empty, it will be filled in automatically'
+    es: 'Sí se selecciona un <strong>Identificador geográfico</strong> (siguiente campo) y este elemento esta vacío, se rellena automáticamente.Si no, se debe llenar con un GEOJSON.'
+    es_AR: 'Sí se selecciona un <strong>Identificador geográfico</strong> (siguiente campo) y este elemento esta vacío, se rellena automáticamente.Si no, se debe llenar con un GEOJSON.'
+    es_419: 'Sí se selecciona un <strong>Identificador geográfico</strong> (siguiente campo) y este elemento esta vacío, se rellena automáticamente. Si no, se debe llenar con un GEOJSON.'
   help_allow_html: True
 
 # spatial_uri | dct:spatial (URI de provincia) | Identificador geográfico a nivel provincial | RECOMENDADO
@@ -615,9 +560,9 @@ dataset_fields:
 - field_name: spatial_uri
   label:
     en: Provincial identifier
-    es: Identificador provincial
-    es_AR: Identificador provincial
-    es_419: Identificador provincial
+    es: Identificador geográfico
+    es_AR: Identificador geográfico
+    es_419: Identificador geográfico
   preset: select_geo_data
   dependent_fields:
     field_name: spatial_coverage
@@ -636,6 +581,14 @@ dataset_fields:
         es_419: Buenos Aires
       spatial: '{"type":"Polygon","coordinates":[[[-63.4,-40.6],[-56.3,-40.6],[-56.3,-33.0],[-63.4,-33.0],[-63.4,-40.6]]]}'
       value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Buenos%20Aires
+
+    - label:
+        es: Ciudad Autónoma de Buenos Aires
+        en: Autonomous City of Buenos Aires
+        es_AR: CABA
+        es_419: Ciudad de Buenos Aires
+      spatial: '{"type":"Polygon","coordinates":[[[-58.5315,-34.7055],[-58.3351,-34.7055],[-58.3351,-34.5265],[-58.5315,-34.5265],[-58.5315,-34.7055]]]}'
+      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Ciudad%20Aut%C3%B3noma%20de%20Buenos%20Aires
 
     - label:
         es: Catamarca
@@ -814,8 +767,10 @@ dataset_fields:
       value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Tucuman
 
   help_text:
-    en: 'Geographic coverage of the dataset.'
-    es: 'Ámbito geográfico cubierto por el conjunto de datos.'
+    en: 'A geographic region that is covered by the dataset.'
+    es: 'Región geográfica que abarca el conjunto de datos.'
+    es_AR: 'Región geográfica que abarca el conjunto de datos.'
+    es_419: 'Región geográfica que abarca el conjunto de datos.'
   help_allow_html: True
 
 
@@ -868,11 +823,7 @@ dataset_fields:
       form_placeholder: '{"type": "Point", "coordinates": [1.5, 1.5]}'
       validators: scheming_valid_json_object
 
-  help_text:
-    en: 'A geographic region that is covered by the dataset.'
-    es: 'Región geográfica que abarca el conjunto de datos.'
-    es_AR: 'Región geográfica que abarca el conjunto de datos.'
-    es_419: 'Región geográfica que abarca el conjunto de datos.'
+
 
 
 # ===========================================================================
@@ -888,7 +839,11 @@ dataset_fields:
     es_AR: Licencia del dataset
     es_419: Licencia del dataset
   form_snippet: license.html
-  help_text: License definitions and additional information can be found at http://opendefinition.org/
+  help_text:
+    en: License definitions and additional information can be found at http://opendefinition.org/
+    es: Definición de licencia para el conjunto de datos. Más información en http://opendefinition.org/
+    es_AR: Definición de licencia para el conjunto de datos. Más información en http://opendefinition.org/
+    es_419: Definición de licencia para el conjunto de datos. Más información en http://opendefinition.org/
 
 # dataset_source | foaf:homepage / dct:source | Perfil datos.gob.ar #31 (landingPage) | OPCIONAL
 - field_name: dataset_source
@@ -897,9 +852,14 @@ dataset_fields:
     es: Fuente del dataset
     es_AR: Fuente del dataset
     es_419: Fuente del dataset
-  form_placeholder: http://example.com/dataset.json
+  form_placeholder: http://indec.gob.ar/precios
   display_property: foaf:homepage
   display_snippet: link.html
+  help_text:
+    en: Dataset source
+    es: Publicación de la que se obtuvieron los datos. Proveer un link que no cambie.
+    es_AR: Publicación de la que se obtuvieron los datos. Proveer un link que no cambie.
+    es_419: Publicación de la que se obtuvieron los datos. Proveer un link que no cambie.
 
 
 # ===========================================================================
@@ -912,22 +872,76 @@ resource_fields:
 - field_name: url
   label: URL
   preset: resource_url_upload
+  form_placeholder: ej. https://datos.ejemplo.gob.ar/dataset/presupuesto-2024.csv
+  help_text:
+    en: >
+      Direct download URL or access URL of the resource/distribution.
+      Can be an external link or a file uploaded to the portal.
+    es: >
+      URL de descarga directa o de acceso al recurso/distribución.
+      Puede ser un enlace externo o un archivo subido al portal.
+    es_AR: >
+      URL de descarga directa o de acceso al recurso/distribución.
+      Puede ser un enlace externo o un archivo subido al portal.
+    es_419: >
+      URL de descarga directa o de acceso al recurso/distribución.
+      Puede ser un enlace externo o un archivo subido al portal.
+  help_inline: true
 
 # name | dct:title | Nombre del recurso/distribución | RECOMENDADO
 - field_name: name
   label: Name
-  form_placeholder: eg. January 2011 Gold Prices
+  form_placeholder: ej. Precios del oro — Enero 2011
+  help_text:
+    en: >
+      Descriptive title of the resource or distribution.
+      It should clearly identify the content or time period it covers.
+    es: >
+      Título descriptivo del recurso o distribución.
+      Debe identificar claramente el contenido o el período temporal que cubre.
+    es_AR: >
+      Título descriptivo del recurso o distribución.
+      Debe identificar claramente el contenido o el período temporal que cubre.
+    es_419: >
+      Título descriptivo del recurso o distribución.
+      Debe identificar claramente el contenido o el período temporal que cubre.
+  help_inline: true
 
 # description | dct:description | Descripción del recurso/distribución | RECOMENDADO
 - field_name: description
   label: Description
   form_snippet: markdown.html
-  form_placeholder: Some useful notes about the data
+  form_placeholder: ej. Contiene los valores mensuales de precio promedio por onza troy, expresados en dólares estadounidenses.
+  help_text:
+    en: >
+      Clear and concise description of the resource or distribution.
+      Include relevant details such as variables, coverage, or specific methodology.
+    es: >
+      Descripción clara y concisa del recurso o distribución.
+      Incluir detalles relevantes como variables, cobertura o metodología específica.
+    es_AR: >
+      Descripción clara y concisa del recurso o distribución.
+      Incluir detalles relevantes como variables, cobertura o metodología específica.
+    es_419: >
+      Descripción clara y concisa del recurso o distribución.
+      Incluir detalles relevantes como variables, cobertura o metodología específica.
+  help_inline: true
 
 # format | dct:format | Formato del archivo del recurso (ej. CSV, JSON, XLSX) | RECOMENDADO
 - field_name: format
   label: Format
   preset: resource_format_autocomplete
+  form_placeholder: ej. CSV
+  help_text:
+    en: >
+      File format of the resource (e.g. CSV, JSON, XLSX, PDF, SHP).
+    es: >
+      Formato del archivo del recurso (p. ej. CSV, JSON, XLSX, PDF, SHP).
+    es_AR: >
+      Formato del archivo del recurso (p. ej. CSV, JSON, XLSX, PDF, SHP).
+    es_419: >
+      Formato del archivo del recurso (p. ej. CSV, JSON, XLSX, PDF, SHP).
+  help_inline: true
 
 # distribution_mediaType | dcat:mediaType | Perfil datos.gob.ar (distribución) | RECOMENDADO
 # Tipos de medios registrados en el vocabulario oficial IANA Media Types (https://www.iana.org/assignments/media-types/)
@@ -943,18 +957,13 @@ resource_fields:
   sorted_choices: false
   help_text:
     en: >
-      IANA media type (MIME type) of the distribution.
-      Select the most appropriate type from the list. See https://www.iana.org/assignments/media-types/ for the full registry.
+      Technical format of the file (e.g. text/csv for spreadsheets, application/json for JSON files).
     es: >
-      Tipo de medio IANA (MIME type) de la distribución.
-      Seleccionar el tipo más adecuado de la lista. Ver https://www.iana.org/assignments/media-types/ para el registro completo.
+      Formato técnico del archivo (p. ej. text/csv para planillas, application/json para archivos JSON).
     es_AR: >
-      Tipo de medio IANA (MIME type) de la distribución.
-      Seleccionar el tipo más adecuado de la lista. Ver https://www.iana.org/assignments/media-types/ para el registro completo.
+      Formato técnico del archivo (p. ej. text/csv para planillas, application/json para archivos JSON).
     es_419: >
-      Tipo de medio IANA (MIME type) de la distribución.
-      Seleccionar el tipo más adecuado de la lista. Ver https://www.iana.org/assignments/media-types/ para el registro completo.
-  help_inline: true
+      Formato técnico del archivo (p. ej. text/csv para hojas de cálculo, application/json para archivos JSON).
   required: false
   choices:
     # Texto
@@ -1111,13 +1120,6 @@ resource_fields:
         es: Sonido — Grabación o archivo de audio
         es_AR: Sonido — Grabación o archivo de audio
         es_419: Sonido — Grabación o archivo de audio
-
-    - value: http://purl.org/dc/dcmitype/Service
-      label:
-        en: Service — API, web service or data endpoint
-        es: Servicio — API, servicio web o endpoint de datos
-        es_AR: Servicio — API, servicio web o endpoint de datos
-        es_419: Servicio — API, servicio web o endpoint de datos
 
     - value: http://purl.org/dc/dcmitype/Software
       label:
@@ -1310,13 +1312,13 @@ resource_fields:
       Relationship between the actual dimension of objects and their possible graphical representations
       through remote sensing or digitization.
     es: >
-      Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
+      Para archivos cartográficos u otros geográficos. Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
       a través de la teledetección o bien de la digitalización.
     es_AR: >
-      Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
+      Para archivos cartográficos u otros geográficos. Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
       a través de la teledetección o bien de la digitalización.
     es_419: >
-      Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
+      Para archivos cartográficos u otros geográficos. Relación entre la dimensión real de los objetos y las representaciones gráficas posibles
       a través de la teledetección o bien de la digitalización.
   help_inline: true
   required: false
@@ -1335,11 +1337,11 @@ resource_fields:
     en: >
       Identifies the coordinate reference system (CRS) used. Use EPSG codes where possible (https://epsg.io/).
     es: >
-      Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
+      Para archivos cartográficos u otros geográficos. Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
     es_AR: >
-      Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
+      Para archivos cartográficos u otros geográficos. Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
     es_419: >
-      Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
+      Para archivos cartográficos u otros geográficos. Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
   help_inline: true
   required: false
 
@@ -1358,11 +1360,11 @@ resource_fields:
     en: >
       Web address to access the metadata catalog of the geographic object, following the ISO 19115 standard.
     es: >
-      Dirección web de acceso al catálogo de metadatos del objeto geográfico, siguiendo la norma ISO 19115.
+      Para archivos cartográficos u otros geográficos. Dirección web de acceso al catálogo de metadatos del objeto geográfico, siguiendo la norma ISO 19115.
     es_AR: >
-      Dirección web de acceso al catálogo de metadatos del objeto geográfico, siguiendo la norma ISO 19115.
+      Para archivos cartográficos u otros geográficos. Dirección web de acceso al catálogo de metadatos del objeto geográfico, siguiendo la norma ISO 19115.
     es_419: >
-      Dirección web de acceso al catálogo de metadatos del objeto geográfico, siguiendo la norma ISO 19115.
+      Para archivos cartográficos u otros geográficos. Dirección web de acceso al catálogo de metadatos del objeto geográfico, siguiendo la norma ISO 19115.
   help_inline: true
   required: false
 
@@ -1381,10 +1383,10 @@ resource_fields:
     en: >
       Connection URL to the WFS geoservice (OGC Web Feature Service) where the present layer can be found.
     es: >
-      URL de conexión a geoservicio WFS (OGC Web Feature Service) en el que se puede encontrar la presente capa.
+      Para archivos cartográficos y otros geográficos. URL de conexión a geoservicio WFS (OGC Web Feature Service) en el que se puede encontrar la presente capa.
     es_AR: >
-      URL de conexión a geoservicio WFS (OGC Web Feature Service) en el que se puede encontrar la presente capa.
+      Para archivos cartográficos y otros geográficos. URL de conexión a geoservicio WFS (OGC Web Feature Service) en el que se puede encontrar la presente capa.
     es_419: >
-      URL de conexión a geoservicio WFS (OGC Web Feature Service) en el que se puede encontrar la presente capa.
+      Para archivos cartográficos y otros geográficos. URL de conexión a geoservicio WFS (OGC Web Feature Service) en el que se puede encontrar la presente capa.
   help_inline: true
   required: false
