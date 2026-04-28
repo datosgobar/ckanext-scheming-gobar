@@ -307,7 +307,12 @@ dataset_fields:
         es_AR: Regiones y Ciudades (REGI)
         es_419: Regiones y Ciudades (REGI)
 
-
+    - value: http://publications.europa.eu/resource/authority/data-theme/INTR
+      label:
+        en: International (INTR)
+        es: Internacional (INTR)
+        es_AR: Internacional (INTR)
+        es_419: Internacional (INTR)
 # dataset_theme | dcat:theme | Perfil datos.gob.ar #23 | OBLIGATORIO (cambio: era Recomendado)
 # Usa el tesauro temático propio del catálogo (puede definirse localmente).
 # Por defecto se replican los mismos valores que dataset_superTheme hasta que se defina un tesauro propio.
