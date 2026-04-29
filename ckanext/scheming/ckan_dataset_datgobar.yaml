@@ -12,7 +12,7 @@ dataset_fields:
 # ===========================================================================
 
 # dataset_title | dct:title | Perfil datos.gob.ar #16 | OBLIGATORIO
-- field_name: dataset_title
+- field_name: title
   display_property: dct:title
   label:
     en: Dataset Title
@@ -313,6 +313,7 @@ dataset_fields:
         es: Internacional (INTR)
         es_AR: Internacional (INTR)
         es_419: Internacional (INTR)
+
 # dataset_theme | dcat:theme | Perfil datos.gob.ar #23 | OBLIGATORIO (cambio: era Recomendado)
 # Usa el tesauro temático propio del catálogo (puede definirse localmente).
 # Por defecto se replican los mismos valores que dataset_superTheme hasta que se defina un tesauro propio.
