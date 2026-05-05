@@ -4,6 +4,8 @@ import os
 import inspect
 import logging
 from functools import wraps
+import requests
+import datetime
 
 import six
 import yaml
@@ -397,6 +399,36 @@ class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
         data_dict.pop('spatial_coverage', None)
         data_dict.pop('temporal_coverage', None)
         return data_dict
+
+    p.implements(p.IResourceController, inherit=True)
+
+    def _get_last_modified_from_url(self, resource):
+        url = resource.get('url')
+        if not url:
+            return None
+        try:
+            response = requests.head(url, timeout=5, allow_redirects=True)
+            last_modified = response.headers.get('Last-Modified')
+            if last_modified:
+                # Header comes in RFC 2822 format: "Wed, 21 Oct 2015 07:28:00 GMT"
+                from email.utils import parsedate_to_datetime
+                dt = parsedate_to_datetime(last_modified)
+                return dt.isoformat()
+        except requests.RequestException:
+            return None
+        return None
+
+    def before_resource_create(self, context, resource):
+        if not resource.get('last_modified'):
+            last_modified = self._get_last_modified_from_url(resource)
+            resource['last_modified'] = last_modified or datetime.now().isoformat()
+        log.error(f"asi quedó el recurso: {resource}")
+
+    def before_resource_update(self, context, current, resource) -> None:
+        if not resource.get('last_modified'):
+            last_modified = self._get_last_modified_from_url(resource)
+            resource['last_modified'] = last_modified or datetime.now().isoformat()
+        log.error(f"asi quedó el recurso: {resource}")
 
 
 
