@@ -152,8 +152,9 @@ dataset_fields:
     es_419: >
       Fecha de última actualización o modificación del dataset. Próximamente esta se computará de manera automática y no por carga de usuario.
   help_inline: true
-  required: true
+  #required: true
   preset: date
+  form_snippet: null
 
 # dataset_status | adms:status | Perfil datos.gob.ar (estado de actualización) | OBLIGATORIO
 - field_name: dataset_status
