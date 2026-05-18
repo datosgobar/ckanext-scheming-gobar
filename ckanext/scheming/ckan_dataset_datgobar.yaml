@@ -43,24 +43,47 @@ dataset_fields:
   preset: dataset_slug
   form_placeholder: eg. my-dataset
 
+# owner_org | dct:creator | Perfil datos.gob.ar #18 (catalog_publisher_name) | OBLIGATORIO
+- field_name: owner_org
+  display_property: dct:creator
+  label:
+     en: Dataset Owner
+     es: Organismo gestor
+     es_AR: Organismo gestor
+     es_419: Organismo gestor
+  preset: dataset_organization
+  form_placeholder: eg. Jefatura de Gabinete de Ministros.
+  help_text:
+    en: >
+      Entity responsible of the catalog holding the dataset.
+    es: >
+      Organismo responsable del catálogo donde se encuentra el dataset.
+    es_AR: >
+      Organismo responsable del catálogo donde se encuentra el dataset.
+    es_419: >
+      Organismo responsable del catálogo donde se encuentra el dataset.
+  help_inline: true
+  required: true
+
 
 # owner_org | dct:publisher | Perfil datos.gob.ar #18 (dataset_publisher_name) | OBLIGATORIO
-- field_name: owner_org
+- field_name: dataset_publisher_name
   display_property: dct:publisher
   label:
      en: Dataset Publisher Name
      es: Organismo publicador
      es_AR: Organismo publicador
      es_419: Organismo publicador
-  preset: dataset_organization
   form_placeholder: eg. Jefatura de Gabinete de Ministros. Secretaría de Medios y Comunicación Pública.
   help_text:
     en: >
       Entity responsible for publishing the dataset.
     es: >
-      Organismo responsable de la publicación del dataset.
+      Organismo responsable de la publicación del dataset. Puede ser el organismo que gestiona el catálogo
+      u otro dentro del mismo.
     es_AR: >
-      Organismo responsable de la publicación del dataset.
+      Organismo responsable de la publicación del dataset. Puede ser el organismo que gestiona el catálogo u otro
+      dentro del mismo.
     es_419: >
       Organismo responsable de la publicación del dataset.
   help_inline: true
@@ -563,7 +586,7 @@ dataset_fields:
   help_allow_html: True
 
 # spatial_uri | dct:spatial (URI de provincia) | Identificador geográfico a nivel provincial | RECOMENDADO
-# Usa la API Georef de datos.gob.ar para identificar provincias argentinas.
+# Usa el vocabulario de territorios de datos.gob.ar (infra.datos.gob.ar/vocabulario/territorio-argentina/).
 - field_name: spatial_uri
   label:
     en: Provincial identifier
@@ -582,6 +605,62 @@ dataset_fields:
   form_include_blank_choice: False
   choices:
     - label:
+        es: República Argentina
+        en: Argentine Republic
+        es_AR: República Argentina
+        es_419: Argentina
+      spatial: '{"type":"Polygon","coordinates":[[[-75.5,-55.1],[-53.6,-55.1],[-53.6,-21.7],[-75.5,-21.7],[-75.5,-55.1]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Pais/Argentina
+
+    - label:
+        es: Noroeste Argentino
+        en: Argentine Northwest
+        es_AR: Noroeste Argentino
+        es_419: NOA
+      spatial: '{"type":"Polygon","coordinates":[[[-69.7,-31.9],[-61.0,-31.9],[-61.0,-21.7],[-69.7,-21.7],[-69.7,-31.9]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Region/NOA
+
+    - label:
+        es: Noreste Argentino
+        en: Argentine Northeast
+        es_AR: Noreste Argentino
+        es_419: NEA
+      spatial: '{"type":"Polygon","coordinates":[[[-63.3,-30.1],[-53.6,-30.1],[-53.6,-22.0],[-63.3,-22.0],[-63.3,-30.1]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Region/NEA
+
+    - label:
+        es: Cuyo
+        en: Cuyo
+        es_AR: Cuyo
+        es_419: Cuyo
+      spatial: '{"type":"Polygon","coordinates":[[[-70.7,-36.6],[-64.9,-36.6],[-64.9,-27.9],[-70.7,-27.9],[-70.7,-36.6]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Region/Cuyo
+
+    - label:
+        es: Región Pampeana
+        en: Pampean Region
+        es_AR: Región Pampeana
+        es_419: Pampeana
+      spatial: '{"type":"Polygon","coordinates":[[[-68.3,-40.6],[-56.3,-40.6],[-56.3,-28.0],[-68.3,-28.0],[-68.3,-40.6]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Region/Pampeana
+
+    - label:
+        es: Área Metropolitana de Buenos Aires
+        en: Buenos Aires Metropolitan Area
+        es_AR: AMBA
+        es_419: AMBA
+      spatial: '{"type":"Polygon","coordinates":[[[-59.2,-34.9],[-58.2,-34.9],[-58.2,-34.3],[-59.2,-34.3],[-59.2,-34.9]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Region/AMBA
+
+    - label:
+        es: Patagonia
+        en: Patagonia
+        es_AR: Patagonia
+        es_419: Patagonia
+      spatial: '{"type":"Polygon","coordinates":[[[-75.5,-55.1],[-63.7,-55.1],[-63.7,-36.5],[-75.5,-36.5],[-75.5,-55.1]]]}'
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Region/Patagonia
+
+    - label:
         es: Buenos Aires
         en: Buenos Aires Province
         es_AR: Provincia de Buenos Aires
@@ -595,7 +674,7 @@ dataset_fields:
         es_AR: CABA
         es_419: Ciudad de Buenos Aires
       spatial: '{"type":"Polygon","coordinates":[[[-58.5315,-34.7055],[-58.3351,-34.7055],[-58.3351,-34.5265],[-58.5315,-34.5265],[-58.5315,-34.7055]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Ciudad%20Aut%C3%B3noma%20de%20Buenos%20Aires
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/CABA/Ciudad-Autonoma-de-Buenos-Aires
 
     - label:
         es: Catamarca
@@ -603,7 +682,7 @@ dataset_fields:
         es_AR: Catamarca
         es_419: Catamarca
       spatial: '{"type":"Polygon","coordinates":[[[-69.4,-30.3],[-64.6,-30.3],[-64.6,-25.2],[-69.4,-25.2],[-69.4,-30.3]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Catamarca
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Catamarca
 
     - label:
         es: Chaco
@@ -611,7 +690,7 @@ dataset_fields:
         es_AR: Chaco
         es_419: Chaco
       spatial: '{"type":"Polygon","coordinates":[[[-63.3,-28.1],[-58.5,-28.1],[-58.5,-24.0],[-63.3,-24.0],[-63.3,-28.1]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Chaco
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Chaco
 
     - label:
         es: Chubut
@@ -619,7 +698,7 @@ dataset_fields:
         es_AR: Chubut
         es_419: Chubut
       spatial: '{"type":"Polygon","coordinates":[[[-72.3,-46.0],[-65.5,-46.0],[-65.5,-42.0],[-72.3,-42.0],[-72.3,-46.0]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Chubut
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Chubut
 
     - label:
         es: Córdoba
@@ -627,7 +706,7 @@ dataset_fields:
         es_AR: Córdoba
         es_419: Córdoba
       spatial: '{"type":"Polygon","coordinates":[[[-65.8,-35.2],[-61.7,-35.2],[-61.7,-29.4],[-65.8,-29.4],[-65.8,-35.2]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Cordoba
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Cordoba
 
     - label:
         es: Corrientes
@@ -635,7 +714,7 @@ dataset_fields:
         es_AR: Corrientes
         es_419: Corrientes
       spatial: '{"type":"Polygon","coordinates":[[[-59.5,-30.1],[-55.6,-30.1],[-55.6,-27.0],[-59.5,-27.0],[-59.5,-30.1]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Corrientes
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Corrientes
 
     - label:
         es: Entre Ríos
@@ -643,7 +722,7 @@ dataset_fields:
         es_AR: Entre Ríos
         es_419: Entre Ríos
       spatial: '{"type":"Polygon","coordinates":[[[-60.2,-34.9],[-57.7,-34.9],[-57.7,-30.2],[-60.2,-30.2],[-60.2,-34.9]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Entre%20Rios
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Entre-Rios
 
     - label:
         es: Formosa
@@ -651,7 +730,7 @@ dataset_fields:
         es_AR: Formosa
         es_419: Formosa
       spatial: '{"type":"Polygon","coordinates":[[[-62.3,-26.5],[-57.6,-26.5],[-57.6,-22.0],[-62.3,-22.0],[-62.3,-26.5]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Formosa
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Formosa
 
     - label:
         es: Jujuy
@@ -659,7 +738,7 @@ dataset_fields:
         es_AR: Jujuy
         es_419: Jujuy
       spatial: '{"type":"Polygon","coordinates":[[[-67.2,-24.5],[-63.8,-24.5],[-63.8,-21.7],[-67.2,-21.7],[-67.2,-24.5]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Jujuy
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Jujuy
 
     - label:
         es: La Pampa
@@ -667,7 +746,7 @@ dataset_fields:
         es_AR: La Pampa
         es_419: La Pampa
       spatial: '{"type":"Polygon","coordinates":[[[-68.3,-39.3],[-63.4,-39.3],[-63.4,-34.5],[-68.3,-34.5],[-68.3,-39.3]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=La%20Pampa
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/La-Pampa
 
     - label:
         es: La Rioja
@@ -675,7 +754,7 @@ dataset_fields:
         es_AR: La Rioja
         es_419: La Rioja
       spatial: '{"type":"Polygon","coordinates":[[[-69.7,-31.9],[-65.2,-31.9],[-65.2,-27.9],[-69.7,-27.9],[-69.7,-31.9]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=La%20Rioja
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/La-Rioja
 
     - label:
         es: Mendoza
@@ -683,7 +762,7 @@ dataset_fields:
         es_AR: Mendoza
         es_419: Mendoza
       spatial: '{"type":"Polygon","coordinates":[[[-70.6,-36.6],[-66.3,-36.6],[-66.3,-32.0],[-70.6,-32.0],[-70.6,-36.6]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Mendoza
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Mendoza
 
     - label:
         es: Misiones
@@ -691,7 +770,7 @@ dataset_fields:
         es_AR: Misiones
         es_419: Misiones
       spatial: '{"type":"Polygon","coordinates":[[[-56.1,-28.1],[-53.6,-28.1],[-53.6,-25.5],[-56.1,-25.5],[-56.1,-28.1]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Misiones
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Misiones
 
     - label:
         es: Neuquén
@@ -699,7 +778,7 @@ dataset_fields:
         es_AR: Neuquén
         es_419: Neuquén
       spatial: '{"type":"Polygon","coordinates":[[[-71.5,-40.5],[-67.0,-40.5],[-67.0,-36.5],[-71.5,-36.5],[-71.5,-40.5]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Neuquen
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Neuquen
 
     - label:
         es: Río Negro
@@ -707,7 +786,7 @@ dataset_fields:
         es_AR: Río Negro
         es_419: Río Negro
       spatial: '{"type":"Polygon","coordinates":[[[-71.7,-42.3],[-63.7,-42.3],[-63.7,-38.7],[-71.7,-38.7],[-71.7,-42.3]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Rio%20Negro
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Rio-Negro
 
     - label:
         es: Salta
@@ -715,7 +794,7 @@ dataset_fields:
         es_AR: Salta
         es_419: Salta
       spatial: '{"type":"Polygon","coordinates":[[[-67.3,-26.4],[-62.3,-26.4],[-62.3,-21.9],[-67.3,-21.9],[-67.3,-26.4]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Salta
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Salta
 
     - label:
         es: San Juan
@@ -723,7 +802,7 @@ dataset_fields:
         es_AR: San Juan
         es_419: San Juan
       spatial: '{"type":"Polygon","coordinates":[[[-70.7,-32.7],[-66.2,-32.7],[-66.2,-28.4],[-70.7,-28.4],[-70.7,-32.7]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=San%20Juan
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/San-Juan
 
     - label:
         es: San Luis
@@ -731,7 +810,7 @@ dataset_fields:
         es_AR: San Luis
         es_419: San Luis
       spatial: '{"type":"Polygon","coordinates":[[[-67.9,-36.0],[-64.9,-36.0],[-64.9,-31.5],[-67.9,-31.5],[-67.9,-36.0]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=San%20Luis
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/San-Luis
 
     - label:
         es: Santa Cruz
@@ -739,7 +818,7 @@ dataset_fields:
         es_AR: Santa Cruz
         es_419: Santa Cruz
       spatial: '{"type":"Polygon","coordinates":[[[-73.0,-52.5],[-65.5,-52.5],[-65.5,-46.0],[-73.0,-46.0],[-73.0,-52.5]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Santa%20Cruz
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Santa-Cruz
 
     - label:
         es: Santa Fe
@@ -747,7 +826,7 @@ dataset_fields:
         es_AR: Santa Fe
         es_419: Santa Fe
       spatial: '{"type":"Polygon","coordinates":[[[-63.5,-34.9],[-58.0,-34.9],[-58.0,-28.0],[-63.5,-28.0],[-63.5,-34.9]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Santa%20Fe
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Santa-Fe
 
     - label:
         es: Santiago del Estero
@@ -755,7 +834,7 @@ dataset_fields:
         es_AR: Santiago del Estero
         es_419: Santiago del Estero
       spatial: '{"type":"Polygon","coordinates":[[[-64.9,-29.9],[-61.0,-29.9],[-61.0,-25.5],[-64.9,-25.5],[-64.9,-29.9]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Santiago%20del%20Estero
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Santiago-del-Estero
 
     - label:
         es: Tierra del Fuego
@@ -763,7 +842,7 @@ dataset_fields:
         es_AR: Tierra del Fuego, Antártida e Islas del Atlántico Sur
         es_419: Tierra del Fuego
       spatial: '{"type":"Polygon","coordinates":[[[-75.5,-55.1],[-64.0,-55.1],[-64.0,-52.5],[-75.5,-52.5],[-75.5,-55.1]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Tierra%20del%20Fuego
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Tierra-del-Fuego
 
     - label:
         es: Tucumán
@@ -771,7 +850,7 @@ dataset_fields:
         es_AR: Tucumán
         es_419: Tucumán
       spatial: '{"type":"Polygon","coordinates":[[[-66.0,-28.0],[-64.5,-28.0],[-64.5,-26.0],[-66.0,-26.0],[-66.0,-28.0]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Tucuman
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Tucuman
 
   help_text:
     en: 'A geographic region that is covered by the dataset.'
