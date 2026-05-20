@@ -85,7 +85,8 @@ dataset_fields:
       Organismo responsable de la publicación del dataset. Puede ser el organismo que gestiona el catálogo u otro
       dentro del mismo.
     es_419: >
-      Organismo responsable de la publicación del dataset.
+      Organismo responsable de la publicación del dataset.Puede ser el organismo que gestiona el catálogo u otro
+      dentro del mismo.
   help_inline: true
   required: true
 
@@ -410,7 +411,7 @@ dataset_fields:
 
 # dataset_hvdcategory | dcatap:hvdCategory | Categoría de alto valor (HVD) | OBLIGATORIO
 # Basado en el Reglamento de Ejecución (UE) 2023/138 sobre conjuntos de datos de alto valor
-- field_name: dataset_hvdcategory
+- field_name: dataset_hvdCategory
   label:
     en: High value category
     es: Categoría de alto valor
@@ -666,7 +667,7 @@ dataset_fields:
         es_AR: Provincia de Buenos Aires
         es_419: Buenos Aires
       spatial: '{"type":"Polygon","coordinates":[[[-63.4,-40.6],[-56.3,-40.6],[-56.3,-33.0],[-63.4,-33.0],[-63.4,-40.6]]]}'
-      value: https://apis.datos.gob.ar/georef/api/provincias?nombre=Buenos%20Aires
+      value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Buenos-Aires
 
     - label:
         es: Ciudad Autónoma de Buenos Aires
@@ -955,7 +956,7 @@ dataset_fields:
 resource_fields:
 
 # url | dcat:downloadURL | URL de descarga o acceso al recurso | OBLIGATORIO
-- field_name: url
+- field_name: distribution_download_url
   label: URL
   preset: resource_url_upload
   form_placeholder: ej. https://datos.ejemplo.gob.ar/dataset/presupuesto-2024.csv
@@ -994,7 +995,7 @@ resource_fields:
   help_inline: true
 
 # description | dct:description | Descripción del recurso/distribución | RECOMENDADO
-- field_name: description
+- field_name: distribution_description
   label: Description
   form_snippet: markdown.html
   form_placeholder: ej. Contiene los valores mensuales de precio promedio por onza troy, expresados en dólares estadounidenses.
@@ -1014,7 +1015,7 @@ resource_fields:
   help_inline: true
 
 # format | dct:format | Formato del archivo del recurso (ej. CSV, JSON, XLSX) | RECOMENDADO
-- field_name: format
+- field_name: distribution_format
   label: Format
   preset: resource_format_autocomplete
   form_placeholder: ej. CSV
