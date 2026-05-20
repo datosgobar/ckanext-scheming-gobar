@@ -237,7 +237,7 @@ dataset_fields:
       Temática(s) o categoría(s) globales a las que pertenece el dataset. Las categorías siguen la taxonomía de la Oficina de Publicaciones de la UE.
   help_inline: true
   required: true
-  preset: select
+  preset: multiple_select
   form_include_blank_choice: true
   sorted_choices: true
   choices:
@@ -356,7 +356,7 @@ dataset_fields:
     en: "Specific thematic categories of the dataset.Use the ids from the taxonomy defined by the Catalog authority."
   help_inline: true
   required: true
-  preset: select
+  preset: multiple_select
   form_include_blank_choice: true
   sorted_choices: true
   choices:
@@ -444,6 +444,11 @@ dataset_fields:
 
     - value: categoria 2
       label: categoria 2
+
+# ===========================================================================
+# LANGUAGE
+# ===========================================================================
+- field_name: dataset_language
 
 
 # ===========================================================================
