@@ -981,7 +981,7 @@ resource_fields:
   help_inline: true
 
 # name | dct:title | Nombre del recurso/distribución | RECOMENDADO
-- field_name: name
+- field_name: distribution_name
   label: Name
   form_placeholder: ej. Precios del oro — Enero 2011
   help_text:
