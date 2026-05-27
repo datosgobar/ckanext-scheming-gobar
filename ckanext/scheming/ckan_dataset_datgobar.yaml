@@ -451,6 +451,7 @@ dataset_fields:
 - field_name: dataset_language
 
 
+
 # ===========================================================================
 # CAMPOS TEMPORALES (accrualPeriodicity, temporal coverage)
 # ===========================================================================
@@ -961,7 +962,7 @@ dataset_fields:
 resource_fields:
 
 # url | dcat:downloadURL | URL de descarga o acceso al recurso | OBLIGATORIO
-- field_name: distribution_download_url
+- field_name: URL
   label: URL
   preset: resource_url_upload
   form_placeholder: ej. https://datos.ejemplo.gob.ar/dataset/presupuesto-2024.csv
@@ -981,7 +982,7 @@ resource_fields:
   help_inline: true
 
 # name | dct:title | Nombre del recurso/distribución | RECOMENDADO
-- field_name: distribution_name
+- field_name: name
   label: Name
   form_placeholder: ej. Precios del oro — Enero 2011
   help_text:
@@ -1000,7 +1001,7 @@ resource_fields:
   help_inline: true
 
 # description | dct:description | Descripción del recurso/distribución | RECOMENDADO
-- field_name: distribution_description
+- field_name: description
   label: Description
   form_snippet: markdown.html
   form_placeholder: ej. Contiene los valores mensuales de precio promedio por onza troy, expresados en dólares estadounidenses.
@@ -1020,7 +1021,7 @@ resource_fields:
   help_inline: true
 
 # format | dct:format | Formato del archivo del recurso (ej. CSV, JSON, XLSX) | RECOMENDADO
-- field_name: distribution_format
+- field_name: format
   label: Format
   preset: resource_format_autocomplete
   form_placeholder: ej. CSV
@@ -1148,13 +1149,12 @@ resource_fields:
 # distribution_type | dct:type | Tipo de distribución según vocabulario DCTYPE/ADMS | RECOMENDADO
 # Basado en Dublin Core Type Vocabulary (http://purl.org/dc/dcmitype/) y vocabulario ADMS
 # Describe la naturaleza del recurso: si es un conjunto de datos, documentación, un servicio, etc.
-- field_name: distribution_type
+- field_name: distribution_category
   label:
     en: Distribution Type
-    es: Tipo de distribución
-    es_AR: Tipo de distribución
-    es_419: Tipo de distribución
-  display_property: dct:type
+    es: Categoria de distribución
+    es_AR: Categoria de distribución
+    es_419: Categoria de distribución
   preset: select
   form_include_blank_choice: true
   sorted_choices: false
@@ -1171,6 +1171,13 @@ resource_fields:
   required: false
   choices:
     # Dublin Core DCMI Type Vocabulary (http://purl.org/dc/dcmitype/)
+    - value : other
+      label:
+        en: Other
+        es: Otro
+        es_AR: Otro
+        es_419: Otro
+
     - value: http://purl.org/dc/dcmitype/Dataset
       label:
         en: Dataset — Tabular or structured data file
