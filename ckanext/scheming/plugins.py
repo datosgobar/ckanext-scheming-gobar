@@ -4,6 +4,9 @@ import os
 import inspect
 import logging
 from functools import wraps
+import requests
+import datetime
+from .utils import recalculate_dataset_fields
 
 import six
 import yaml
@@ -390,6 +393,76 @@ class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
         return bp
 
 
+class DgobarDataLifeCyclePlugin(p.SingletonPlugin):
+    """
+    Gestiona el ciclo de vida de los datos en el portal datos.gob.ar:
+    - Recalcula dataset_modified y dataset_status al crear un dataset
+      o cuando cambia el last_modified de un recurso.
+    - Enriquece last_modified de recursos desde headers HTTP si no está presente.
+    - Limpia campos espaciales/temporales del índice Solr.
+    """
+    p.implements(p.IPackageController, inherit=True)
+    p.implements(p.IResourceController, inherit=True)
+
+    # ==========================================================================
+    # IPackageController
+    # ==========================================================================
+
+    def after_dataset_create(self, context, pkg_dict):
+        if context.get('__recalculating_dataset_fields'):
+            return
+        recalculate_dataset_fields(pkg_dict['id'])
+
+    def before_dataset_index(self, data_dict):
+        data_dict.pop('spatial_coverage', None)
+        data_dict.pop('temporal_coverage', None)
+        return data_dict
+
+    # ==========================================================================
+    # IResourceController
+    # ==========================================================================
+
+    def _get_last_modified_from_url(self, resource):
+        """Intenta obtener Last-Modified del header HTTP de la URL del recurso."""
+        url = resource.get('url')
+        if not url:
+            return None
+        try:
+            response = requests.head(url, timeout=5, allow_redirects=True)
+            last_modified = response.headers.get('Last-Modified')
+            if last_modified:
+                from email.utils import parsedate_to_datetime
+                dt = parsedate_to_datetime(last_modified)
+                return dt.isoformat()
+        except requests.RequestException:
+            return None
+        return None
+
+    def before_resource_create(self, context, resource):
+        if not resource.get('last_modified'):
+            last_modified = self._get_last_modified_from_url(resource)
+            resource['last_modified'] = last_modified
+
+
+    def before_resource_update(self, context, current, resource):
+        context['__previous_last_modified'] = current.get('last_modified')
+        if not resource.get('last_modified'):
+            last_modified = self._get_last_modified_from_url(resource)
+            resource['last_modified'] = last_modified
+
+
+
+    def after_resource_update(self, context, resource):
+        if context.get('__recalculating_dataset_fields'):
+            return
+        pkg_id = resource.get('package_id')
+        if not pkg_id:
+            return
+        if resource.get('last_modified') != context.get('__previous_last_modified'):
+            recalculate_dataset_fields(pkg_id)
+
+
+
 def expand_form_composite(data, fieldnames):
     """
     when submitting dataset/resource form composite fields look like
@@ -516,6 +589,7 @@ class SchemingNerfIndexPlugin(p.SingletonPlugin):
                 data_dict[d['field_name']] = json.dumps(data_dict[d['field_name']])
 
         return data_dict
+
 
 
 def _load_schemas(schemas, type_field):

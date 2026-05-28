@@ -35,6 +35,7 @@ setup(
     """
     [ckan.plugins]
     scheming_datasets=ckanext.scheming.plugins:SchemingDatasetsPlugin
+    dgobar_data_lifecycle = ckanext.scheming.plugins:DgobarDataLifeCyclePlugin
     scheming_groups=ckanext.scheming.plugins:SchemingGroupsPlugin
     scheming_organizations=ckanext.scheming.plugins:SchemingOrganizationsPlugin
     scheming_nerf_index=ckanext.scheming.plugins:SchemingNerfIndexPlugin

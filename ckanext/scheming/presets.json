@@ -24,7 +24,9 @@
       "preset_name": "tag_string_autocomplete",
       "values": {
         "validators": "ignore_missing tag_string_convert",
-        "classes": ["control-full"],
+        "classes": [
+          "control-full"
+        ],
         "form_attrs": {
           "data-module": "autocomplete",
           "data-module-tags": "",
@@ -78,6 +80,24 @@
     },
 
     {
+      "preset_name": "spatial_dependent_fields",
+      "values": {
+        "form_snippet": "json.html",
+        "display_snippet": "spatial_json.html",
+        "validators": "scheminggobar_spatial_uri_validator ignore_missing scheming_valid_json_object schemingdcat_fill_spatial_dependent_fields"
+      }
+    },
+    {
+      "preset_name": "select_geo_data",
+      "values": {
+        "form_snippet": "select_multiple_spatial_uri.html",
+        "display_snippet": "select_multiple_spatial.html",
+        "validators": "ignore_missing scheminggobar_fill_spatial_uri_dependent_fields",
+        "output_validators": "scheming_multiple_choice_output"
+      }
+    },
+
+    {
       "preset_name": "resource_format_autocomplete",
       "values": {
         "validators": "if_empty_guess_format ignore_missing clean_format unicode_safe",
@@ -120,6 +140,23 @@
         "form_snippet": "date.html",
         "display_snippet": "date.html",
         "validators": "scheming_required isodate convert_to_json_if_date"
+      }
+    },
+      {
+      "preset_name": "end_date",
+      "values": {
+        "form_snippet": "date.html",
+        "display_snippet": "date.html",
+        "validators": "scheming_required isodate convert_to_json_if_date scheminggobar_larger_than_start"
+      }
+    },
+
+    {
+      "preset_name": "date_dependent_fields",
+      "values": {
+        "form_snippet": "date.html",
+        "display_snippet": "date_localised.html",
+        "validators": "scheming_required isodate convert_to_json_if_date schemingdcat_fill_dependent_fields"
       }
     },
     {

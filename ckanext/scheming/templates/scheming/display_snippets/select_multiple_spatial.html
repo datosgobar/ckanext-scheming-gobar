@@ -1,0 +1,10 @@
+{% set values = data[field.field_name] %}
+{% if values is string %}
+  {% set values = [values] %}
+{% endif %}
+
+{% for value in values %}
+  {% set label = h.scheming_choices_label(h.scheming_field_choices(field), value) %}
+  {% set label_text = value if value == label else label %}
+  <a href="{{ value }}">{{ h.schemingdcat_prettify_url_name(label_text) }}</a>
+{% endfor %}
