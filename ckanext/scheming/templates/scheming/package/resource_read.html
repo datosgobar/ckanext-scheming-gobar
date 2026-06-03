@@ -75,8 +75,10 @@
           {%- endfor -%}
         {%- endblock -%}
         {%- block resource_more_items -%}
+          {%- set schema_field_names = schema.resource_fields | map(attribute='field_name') | list -%}
           {% for key, value in h.format_resource_items(res.items()) %}
-            {% if key not in ('created', 'metadata modified', 'last modified', 'format') %}
+            {% if key not in ('created', 'metadata modified', 'last modified', 'format')
+               and key not in schema_field_names %}
               <tr class="toggle-more"><th scope="row">{{ key | capitalize }}</th><td>{{ value }}</td></tr>
             {% endif %}
           {% endfor %}

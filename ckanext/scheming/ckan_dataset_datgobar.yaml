@@ -66,7 +66,7 @@ dataset_fields:
   required: true
 
 
-# owner_org | dct:publisher | Perfil datos.gob.ar #18 (dataset_publisher_name) | OBLIGATORIO
+# dataset_publisher_name | dct:publisher | Perfil datos.gob.ar #18 (dataset_publisher_name) | OBLIGATORIO
 - field_name: dataset_publisher_name
   display_property: dct:publisher
   label:
@@ -110,8 +110,8 @@ dataset_fields:
   required: false
 
 
-# dataset_description | dct:description | Perfil datos.gob.ar #17 | OBLIGATORIO
-- field_name: dataset_description
+# notes, equivale a dataset_description | dct:description | Perfil datos.gob.ar #17 | OBLIGATORIO
+- field_name: notes
   display_property: dct:description
   label:
     en: Dataset Description
@@ -448,7 +448,41 @@ dataset_fields:
 # ===========================================================================
 # LANGUAGE
 # ===========================================================================
+# dataset_language | dct:language | Perfil datos.gob.ar #28 | OBLIGATORIO
+# Usar URI del vocabulario de lenguas de la EU Publications Office:
+# http://publications.europa.eu/resource/authority/language/
 - field_name: dataset_language
+  display_property: dct:language
+  label:
+    en: Dataset Language
+    es: Idioma del dataset
+    es_AR: Idioma del dataset
+    es_419: Idioma del dataset
+  preset: select
+  form_include_blank_choice: false
+  sorted_choices: false
+  help_text:
+    en: >
+      Language in which the dataset content is expressed.
+      The value is fixed to Spanish, as per the scope of this catalog.
+    es: >
+      Idioma en que está expresado el contenido del dataset.
+      El valor está fijado en español, conforme al alcance de este catálogo.
+    es_AR: >
+      Idioma en que está expresado el contenido del dataset.
+      El valor está fijado en español, conforme al alcance de este catálogo.
+    es_419: >
+      Idioma en que está expresado el contenido del dataset.
+      El valor está fijado en español, conforme al alcance de este catálogo.
+  help_inline: true
+  default: http://publications.europa.eu/resource/authority/language/SPA
+  choices:
+    - value: http://publications.europa.eu/resource/authority/language/SPA
+      label:
+        en: Spanish
+        es: Español
+        es_AR: Español
+        es_419: Español
 
 
 
@@ -938,21 +972,22 @@ dataset_fields:
     es_AR: Definición de licencia para el conjunto de datos. Más información en http://opendefinition.org/
     es_419: Definición de licencia para el conjunto de datos. Más información en http://opendefinition.org/
 
-# dataset_source | foaf:homepage / dct:source | Perfil datos.gob.ar #31 (landingPage) | OPCIONAL
+# dataset_source | dct:source | Perfil datos.gob.ar #31 | OPCIONAL
 - field_name: dataset_source
   label:
     en: Dataset source
     es: Fuente del dataset
     es_AR: Fuente del dataset
     es_419: Fuente del dataset
-  form_placeholder: http://indec.gob.ar/precios
-  display_property: foaf:homepage
-  display_snippet: link.html
+  form_placeholder: eg. INDEC. Encuesta Permanente de Hogares (EPH).
+  display_property: dct:source
   help_text:
-    en: Dataset source
-    es: Publicación de la que se obtuvieron los datos. Proveer un link que no cambie.
-    es_AR: Publicación de la que se obtuvieron los datos. Proveer un link que no cambie.
-    es_419: Publicación de la que se obtuvieron los datos. Proveer un link que no cambie.
+    en: Publication or source from which the data was obtained.
+    es: Publicación o fuente de la que se obtuvieron los datos.
+    es_AR: Publicación o fuente de la que se obtuvieron los datos.
+    es_419: Publicación o fuente de la que se obtuvieron los datos.
+  help_inline: true
+  required: false
 
 
 # ===========================================================================
@@ -962,7 +997,7 @@ dataset_fields:
 resource_fields:
 
 # url | dcat:downloadURL | URL de descarga o acceso al recurso | OBLIGATORIO
-- field_name: URL
+- field_name: url
   label: URL
   preset: resource_url_upload
   form_placeholder: ej. https://datos.ejemplo.gob.ar/dataset/presupuesto-2024.csv
@@ -1038,7 +1073,7 @@ resource_fields:
 
 # distribution_mediaType | dcat:mediaType | Perfil datos.gob.ar (distribución) | RECOMENDADO
 # Tipos de medios registrados en el vocabulario oficial IANA Media Types (https://www.iana.org/assignments/media-types/)
-- field_name: distribution_mediaType
+- field_name: mimetype
   label:
     en: Media Type
     es: Tipo de medio (IANA)
@@ -1149,7 +1184,7 @@ resource_fields:
 # distribution_type | dct:type | Tipo de distribución según vocabulario DCTYPE/ADMS | RECOMENDADO
 # Basado en Dublin Core Type Vocabulary (http://purl.org/dc/dcmitype/) y vocabulario ADMS
 # Describe la naturaleza del recurso: si es un conjunto de datos, documentación, un servicio, etc.
-- field_name: distribution_category
+- field_name: category
   label:
     en: Distribution Type
     es: Categoria de distribución
@@ -1296,7 +1331,7 @@ resource_fields:
 # distribution_character_set | cnt:characterEncoding | Perfil datos.gob.ar #48 | RECOMENDADO (Consulta Pública)
 # Vocabulario: IANA Character Sets (https://www.iana.org/assignments/character-sets/)
 # El nombre preferido de cada codificación es el que figura en el registro IANA.
-- field_name: distribution_character_set
+- field_name: character_set
   display_property: cnt:characterEncoding
   label:
     en: Character Set
@@ -1398,13 +1433,13 @@ resource_fields:
 # ===========================================================================
 
 # distribution_scale | dcat:spatialResolutionInMeters | Perfil datos.gob.ar #50 | RECOMENDADO (Consulta Pública)
-- field_name: distribution_scale
+- field_name: scale
   display_property: dcat:spatialResolutionInMeters
   label:
     en: Scale
-    es: Escala
-    es_AR: Escala
-    es_419: Escala
+    es: Escala (sólo para Recursos Geográficos)
+    es_AR: Escala (sólo para Recursos Geográficos)
+    es_419: Escala (sólo para Recursos Geográficos)
   form_placeholder: eg. 1:50000
   help_text:
     en: >
@@ -1424,14 +1459,16 @@ resource_fields:
 
 # distribution_projection | dct:conformsTo | Perfil datos.gob.ar #51 | RECOMENDADO (Consulta Pública)
 # Los sistemas de referencia se identifican mediante códigos EPSG (https://epsg.io/)
-- field_name: distribution_projection
+- field_name: projection
   display_property: dct:conformsTo
   label:
     en: Projection
-    es: Proyección
-    es_AR: Proyección
-    es_419: Proyección
-  form_placeholder: eg. EPSG:4326 (WGS84)
+    es: Proyección (sólo para Recursos Geográficos)
+    es_AR: Proyección (sólo para Recursos Geográficos)
+    es_419: Proyección (sólo para Recursos Geográficos)
+  preset: select
+  form_include_blank_choice: true
+  sorted_choices: false
   help_text:
     en: >
       Identifies the coordinate reference system (CRS) used. Use EPSG codes where possible (https://epsg.io/).
@@ -1443,16 +1480,82 @@ resource_fields:
       Para archivos cartográficos u otros geográficos. Identifica el sistema de referencia de coordenadas (CRS) utilizado. Usar códigos EPSG cuando sea posible (https://epsg.io/).
   help_inline: true
   required: false
+  choices:
+    # Global — web mapping y datos abiertos
+    - value: EPSG:4326
+      label: EPSG:4326 — WGS 84 (GPS, GeoJSON, estándar internacional)
+
+    - value: EPSG:3857
+      label: EPSG:3857 — Web Mercator (Google Maps, OpenStreetMap)
+
+    # Argentina — datum geográfico oficial
+    - value: EPSG:5340
+      label: EPSG:5340 — POSGAR 2007 (datum geográfico oficial IGN, reemplaza POSGAR 94)
+
+    - value: EPSG:4172
+      label: EPSG:4172 — POSGAR 94 (datum anterior IGN)
+
+    # Argentina — POSGAR 2007 por faja Gauss-Krüger (verificados epsg.io)
+    - value: EPSG:5343
+      label: EPSG:5343 — POSGAR 2007 / Faja 1 (oeste de 70°30'W)
+
+    - value: EPSG:5344
+      label: EPSG:5344 — POSGAR 2007 / Faja 2 (70°30'W – 67°30'W)
+
+    - value: EPSG:5345
+      label: EPSG:5345 — POSGAR 2007 / Faja 3 (67°30'W – 64°30'W)
+
+    - value: EPSG:5346
+      label: EPSG:5346 — POSGAR 2007 / Faja 4 (64°30'W – 61°30'W)
+
+    - value: EPSG:5347
+      label: EPSG:5347 — POSGAR 2007 / Faja 5 (61°30'W – 58°30'W)
+
+    - value: EPSG:5348
+      label: EPSG:5348 — POSGAR 2007 / Faja 6 (58°30'W – 55°30'W)
+
+    - value: EPSG:5349
+      label: EPSG:5349 — POSGAR 2007 / Faja 7 (este de 55°30'W)
+
+    # Argentina — POSGAR 94 por faja Gauss-Krüger (legacy, aún muy presentes en shapefiles)
+    - value: EPSG:22181
+      label: EPSG:22181 — POSGAR 94 / Faja 1
+
+    - value: EPSG:22182
+      label: EPSG:22182 — POSGAR 94 / Faja 2
+
+    - value: EPSG:22183
+      label: EPSG:22183 — POSGAR 94 / Faja 3
+
+    - value: EPSG:22184
+      label: EPSG:22184 — POSGAR 94 / Faja 4
+
+    - value: EPSG:22185
+      label: EPSG:22185 — POSGAR 94 / Faja 5 (Buenos Aires, Entre Ríos, Córdoba)
+
+    - value: EPSG:22186
+      label: EPSG:22186 — POSGAR 94 / Faja 6
+
+    - value: EPSG:22187
+      label: EPSG:22187 — POSGAR 94 / Faja 7
+
+    # Latinoamérica
+    - value: EPSG:4674
+      label: EPSG:4674 — SIRGAS 2000 (sistema oficial en gran parte de Latinoamérica)
+
+    # Otro
+    - value: other
+      label: Otro (especificar en descripción del recurso)
 
 # distribution_iso19115_url | dct:conformsTo | Perfil datos.gob.ar #52 | RECOMENDADO (Consulta Pública)
 # Enlace al registro de metadatos geográficos según la norma ISO 19115
-- field_name: distribution_iso19115_url
+- field_name: iso19115_url
   display_property: dct:conformsTo
   label:
     en: ISO 19115 Metadata URL
-    es: URL a metadatos según ISO 19115
-    es_AR: URL a metadatos según ISO 19115
-    es_419: URL a metadatos según ISO 19115
+    es: URL a metadatos según ISO 19115 (sólo para Recursos Geográficos)
+    es_AR: URL a metadatos según ISO 19115 (sólo para Recursos Geográficos)
+    es_419: URL a metadatos según ISO 19115 (sólo para Recursos Geográficos)
   form_placeholder: eg. https://catalogo.ejemplo.gob.ar/metadatos/capa-xyz
   display_snippet: link.html
   help_text:
@@ -1473,9 +1576,9 @@ resource_fields:
   display_property: dcat:accessService
   label:
     en: WFS Geoservice URL
-    es: Link a geoservicio WFS
-    es_AR: Link a geoservicio WFS
-    es_419: Link a geoservicio WFS
+    es: Link a geoservicio WFS (sólo para Recursos Geográficos)
+    es_AR: Link a geoservicio WFS (sólo para Recursos Geográficos)
+    es_419: Link a geoservicio WFS (sólo para Recursos Geográficos)
   form_placeholder: eg. https://geoserver.ejemplo.gob.ar/wfs?service=WFS&request=GetCapabilities
   display_snippet: link.html
   help_text:
