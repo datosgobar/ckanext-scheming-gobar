@@ -43,6 +43,15 @@ dataset_fields:
   preset: dataset_slug
   form_placeholder: eg. my-dataset
 
+#original_identifier| Es el dataset_identifier en el catálogo fuente
+- field_name: original_identifier
+  label:
+    en: Original identifier
+    es: Identificador en origen
+    es_AR: Identificador en origen
+    es_419: Identificador en origen
+  form_snippet: null
+
 # owner_org | dct:creator | Perfil datos.gob.ar #18 (catalog_publisher_name) | OBLIGATORIO
 - field_name: owner_org
   display_property: dct:creator
@@ -515,50 +524,40 @@ dataset_fields:
   sorted_choices: true
   display_property: dct:accrualPeriodicity
   choices:
-    - value: http://publications.europa.eu/resource/authority/frequency/CONT
+    - value: R/PT1S
       label: R/PT1S (cada segundo)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/HOURLY
+    - value: R/PT1H
       label: R/PT1H (cada hora)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/DAILY
+    - value: R/PT1M
+      label: R/PT1M (cada minuto)
+    - value: R/P1D
       label: R/P1D (diariamente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/WEEKLY
+    - value: R/P1W
       label: R/P1W (semanalmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/BIWEEKLY
+    - value: R/P0.5M
       label: R/P0.5M (quincenalmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/MONTHLY
+    - value: R/P1M
       label: R/P1M (mensualmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/BIMONTHLY
+    - value: R/P2M
       label: R/P2M (bimestralmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/QUARTERLY
+    - value: R/P3M
       label: R/P3M (trimestralmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_3
+    - value: R/P4M
       label: R/P4M (cuatrimestralmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_2
+    - value: R/P6M
       label: R/P6M (semestralmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/ANNUAL
+    - value: R/P1Y
       label: R/P1Y (anualmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/BIENNIAL
+    - value: R/P2Y
       label: R/P2Y (bianualmente)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL
+    - value: R/P4Y
       label: R/P4Y (cada 4 años)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/DECENNIAL
+    - value: R/P10Y
       label: R/P10Y (cada 10 años)
-
-    - value: http://publications.europa.eu/resource/authority/frequency/IRREG
-      label: eventual
+    - value: eventual
+      label: Irregular / Eventual
+    - value: sin especificar
+      label: Sin especificar
 
 # temporal_start | dct:temporal / dcat:startDate | Perfil datos.gob.ar #30 (inicio) | RECOMENDADO
 - field_name: temporal_start
@@ -1015,6 +1014,15 @@ resource_fields:
       URL de descarga directa o de acceso al recurso/distribución.
       Puede ser un enlace externo o un archivo subido al portal.
   help_inline: true
+
+#original_identifier| Es el dataset_identifier en el catálogo fuente
+- field_name: original_identifier
+  label:
+   en: Original identifier
+   es: Identificador en origen
+   es_AR: Identificador en origen
+   es_419: Identificador en origen
+  form_snippet: null
 
 # name | dct:title | Nombre del recurso/distribución | RECOMENDADO
 - field_name: name
