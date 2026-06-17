@@ -705,7 +705,7 @@ dataset_fields:
         en: Buenos Aires Province
         es_AR: Provincia de Buenos Aires
         es_419: Buenos Aires
-      spatial: '{"type":"Polygon","coordinates":[[[-63.4,-40.6],[-56.3,-40.6],[-56.3,-33.0],[-63.4,-33.0],[-63.4,-40.6]]]}'
+      spatial: '{"type":"Polygon","coordinates":[[[-63.9,-41.3],[-56.1,-41.3],[-56.1,-33.0],[-63.9,-33.0],[-63.9,-41.3]]]}'
       value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Buenos-Aires
 
     - label:
@@ -737,7 +737,7 @@ dataset_fields:
         en: Chubut
         es_AR: Chubut
         es_419: Chubut
-      spatial: '{"type":"Polygon","coordinates":[[[-72.3,-46.0],[-65.5,-46.0],[-65.5,-42.0],[-72.3,-42.0],[-72.3,-46.0]]]}'
+      spatial: '{"type":"Polygon","coordinates":[[[-72.4,-46.3],[-63.3,-46.3],[-63.3,-41.8],[-72.4,-41.8],[-72.4,-46.3]]]}'
       value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Chubut
 
     - label:
@@ -825,7 +825,7 @@ dataset_fields:
         en: Río Negro
         es_AR: Río Negro
         es_419: Río Negro
-      spatial: '{"type":"Polygon","coordinates":[[[-71.7,-42.3],[-63.7,-42.3],[-63.7,-38.7],[-71.7,-38.7],[-71.7,-42.3]]]}'
+      spatial: '{"type":"Polygon","coordinates":[[[-72.2,-42.5],[-62.5,-42.5],[-62.5,-37.2],[-72.2,-37.2],[-72.2,-42.5]]]}'
       value: https://infra.datos.gob.ar/vocabulario/territorio-argentina/Provincia/Rio-Negro
 
     - label:
