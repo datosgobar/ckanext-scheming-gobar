@@ -257,96 +257,103 @@ dataset_fields:
         es_AR: Sin tema
         es_419: Sin tema
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/TECH
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/AGRI
       label:
-        en: Technology (TECH)
-        es: Tecnología (TECH)
-        es_AR: Tecnología (TECH)
-        es_419: Tecnología (TECH)
+        en: Agriculture, fisheries, forestry and food (AGRI)
+        es: Agroganadería, pesca y forestación (AGRI)
+        es_AR: Agroganadería, pesca y forestación (AGRI)
+        es_419: Agroganadería, pesca y forestación (AGRI)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/ECON
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/DEFE
       label:
-        en: Economy and Finance (ECON)
-        es: Economía y Finanzas (ECON)
-        es_AR: Economía y Finanzas (ECON)
-        es_419: Economía y Finanzas (ECON)
+        en: Defence (DEFE)
+        es: Defensa (DEFE)
+        es_AR: Defensa (DEFE)
+        es_419: Defensa (DEFE)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/EDUC
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/ECON
       label:
-        en: Education, Culture and Sport (EDUC)
-        es: Educación, Cultura y Deporte (EDUC)
-        es_AR: Educación, Cultura y Deporte (EDUC)
-        es_419: Educación, Cultura y Deporte (EDUC)
+        en: Economy and finance (ECON)
+        es: Economía y finanzas (ECON)
+        es_AR: Economía y finanzas (ECON)
+        es_419: Economía y finanzas (ECON)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/SOCI
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/EDUC
       label:
-        en: Population and Society (SOCI)
-        es: Población y Sociedad (SOCI)
-        es_AR: Población y Sociedad (SOCI)
-        es_419: Población y Sociedad (SOCI)
+        en: Education, culture and sport (EDUC)
+        es: Educación, cultura y deportes (EDUC)
+        es_AR: Educación, cultura y deportes (EDUC)
+        es_419: Educación, cultura y deportes (EDUC)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/ENER
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/ENER
       label:
         en: Energy (ENER)
         es: Energía (ENER)
         es_AR: Energía (ENER)
         es_419: Energía (ENER)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/GOVE
-      label:
-        en: Government and Public Sector (GOVE)
-        es: Gobierno y Sector Público (GOVE)
-        es_AR: Gobierno y Sector Público (GOVE)
-        es_419: Gobierno y Sector Público (GOVE)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/JUST
-      label:
-        en: Justice, Legal System and Public Safety (JUST)
-        es: Justicia, Sistema Legal y Seguridad Pública (JUST)
-        es_AR: Justicia, Sistema Legal y Seguridad Pública (JUST)
-        es_419: Justicia, Sistema Legal y Seguridad Pública (JUST)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/ENVI
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/ENVI
       label:
         en: Environment (ENVI)
-        es: Medio Ambiente (ENVI)
-        es_AR: Medio Ambiente (ENVI)
-        es_419: Medio Ambiente (ENVI)
+        es: Medio ambiente (ENVI)
+        es_AR: Medio ambiente (ENVI)
+        es_419: Medio ambiente (ENVI)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/AGRI
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/GOVE
       label:
-        en: Agriculture, Fisheries, Forestry and Food (AGRI)
-        es: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
-        es_AR: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
-        es_419: Agricultura, Pesca, Silvicultura y Alimentación (AGRI)
+        en: Government and public sector (GOVE)
+        es: Gobierno y sector público (GOVE)
+        es_AR: Gobierno y sector público (GOVE)
+        es_419: Gobierno y sector público (GOVE)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/HEAL
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/HEAL
       label:
         en: Health (HEAL)
         es: Salud (HEAL)
         es_AR: Salud (HEAL)
         es_419: Salud (HEAL)
 
-    - value: http://publications.europa.eu/resource/authority/data-theme/TRAN
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/INTR
+      label:
+        en: International issues (INTR)
+        es: Asuntos internacionales (INTR)
+        es_AR: Asuntos internacionales (INTR)
+        es_419: Asuntos internacionales (INTR)
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/JUST
+      label:
+        en: Justice, legal system and public safety (JUST)
+        es: Justicia y seguridad (JUST)
+        es_AR: Justicia y seguridad (JUST)
+        es_419: Justicia y seguridad (JUST)
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/SOCI
+      label:
+        en: Population and society (SOCI)
+        es: Población y sociedad (SOCI)
+        es_AR: Población y sociedad (SOCI)
+        es_419: Población y sociedad (SOCI)
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/TECH
+      label:
+        en: Science and technology (TECH)
+        es: Ciencia y tecnología (TECH)
+        es_AR: Ciencia y tecnología (TECH)
+        es_419: Ciencia y tecnología (TECH)
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/TERRI
+      label:
+        en: Territory and geography (TERRI)
+        es: Territorio (TERRI)
+        es_AR: Territorio (TERRI)
+        es_419: Territorio (TERRI)
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/SuperTheme/TRAN
       label:
         en: Transport (TRAN)
         es: Transporte (TRAN)
         es_AR: Transporte (TRAN)
         es_419: Transporte (TRAN)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/REGI
-      label:
-        en: Regions and Cities (REGI)
-        es: Regiones y Ciudades (REGI)
-        es_AR: Regiones y Ciudades (REGI)
-        es_419: Regiones y Ciudades (REGI)
-
-    - value: http://publications.europa.eu/resource/authority/data-theme/INTR
-      label:
-        en: International (INTR)
-        es: Internacional (INTR)
-        es_AR: Internacional (INTR)
-        es_419: Internacional (INTR)
 
 # dataset_theme | dcat:theme | Perfil datos.gob.ar #23 | OBLIGATORIO (cambio: era Recomendado)
 # Usa el tesauro temático propio del catálogo (puede definirse localmente).
