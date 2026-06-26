@@ -247,6 +247,7 @@ dataset_fields:
   help_inline: true
   required: true
   preset: multiple_select
+  display_snippet: multiple_choice_link.html
   form_include_blank_choice: true
   sorted_choices: true
   choices:

@@ -1,0 +1,33 @@
+{%- set values = data[field.field_name] -%}
+{%- set items = [] -%}
+
+{%- for choice in h.scheming_field_choices(field) -%}
+  {%- if choice.value in values -%}
+    {%- do items.append({'value': choice.value, 'label': h.scheming_language_text(choice.label)}) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if field.get('sorted_choices') -%}
+  {%- set items = items|sort(attribute='label') -%}
+{%- endif -%}
+
+{%- if items|length == 1 -%}
+  {%- set item = items[0] -%}
+  {%- if item.value.startswith('http') -%}
+    <a href="{{ item.value }}">{{ item.label }}</a>
+  {%- else -%}
+    {{ item.label }}
+  {%- endif -%}
+{%- else -%}
+  <ul>
+  {%- for item in items -%}
+    <li>
+      {%- if item.value.startswith('http') -%}
+        <a href="{{ item.value }}">{{ item.label }}</a>
+      {%- else -%}
+        {{ item.label }}
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+  </ul>
+{%- endif -%}
