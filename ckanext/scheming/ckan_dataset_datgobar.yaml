@@ -118,6 +118,24 @@ dataset_fields:
   help_inline: true
   required: false
 
+# dataset_landingPage | dcat:landingPage | Perfil datos.gob.ar | RECOMENDADO
+- field_name: dataset_landingPage
+  display_property: dcat:landingPage
+  label:
+    en: Dataset Landing Page
+    es: Página de referencia del dataset
+    es_AR: Página de referencia del dataset
+    es_419: Página de referencia del dataset
+  form_placeholder: eg. https://datos.gob.ar/dataset/mi-dataset
+  display_snippet: link.html
+  help_text:
+    en: "Web page that provides access to the dataset and additional information about it."
+    es: "Página web que da acceso al dataset y brinda información adicional sobre el mismo."
+    es_AR: "Página web que da acceso al dataset y brinda información adicional sobre el mismo."
+    es_419: "Página web que da acceso al dataset y brinda información adicional sobre el mismo."
+  help_inline: true
+  required: false
+
 
 # notes, equivale a dataset_description | dct:description | Perfil datos.gob.ar #17 | OBLIGATORIO
 - field_name: notes
