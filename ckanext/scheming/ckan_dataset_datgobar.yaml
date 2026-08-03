@@ -1089,6 +1089,23 @@ resource_fields:
       Incluir detalles relevantes como variables, cobertura o metodología específica.
   help_inline: true
 
+# distribution_accessURL | dcat:landingPage | Perfil datos.gob.ar | OBLIGATORIO
+- field_name: distribution_accessURL
+  label:
+    en: Distribution Landing Page
+    es: Página de referencia de la distribución
+    es_AR: Página de referencia de la distribución
+    es_419: Página de referencia de la distribución
+  form_placeholder: eg. https://datos.gob.ar/dataset/mi-dataset/resource/mi-recurso
+  display_snippet: link.html
+  help_text:
+    en: "Web page that provides access to the resource and additional information about it."
+    es: "Página web que da acceso a la distribución y brinda información adicional sobre el mismo."
+    es_AR: "Página web que da acceso a la distribución y brinda información adicional sobre el mismo."
+    es_419: "Página web que da acceso a la distribución y brinda información adicional sobre el mismo."
+  help_inline: true
+  required: false
+
 # format | dct:format | Formato del archivo del recurso (ej. CSV, JSON, XLSX) | RECOMENDADO
 - field_name: format
   label: Format
