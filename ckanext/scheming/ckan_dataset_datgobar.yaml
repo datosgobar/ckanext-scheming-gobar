@@ -375,8 +375,7 @@ dataset_fields:
         es_419: Transporte (TRAN)
 
 # dataset_theme | dcat:theme | Perfil datos.gob.ar #23 | OBLIGATORIO (cambio: era Recomendado)
-# Usa el tesauro temático propio del catálogo (puede definirse localmente).
-# Por defecto se replican los mismos valores que dataset_superTheme hasta que se defina un tesauro propio.
+# Usa el tesauro temático propio del catálogo definido en temas-datos-gob-ar.ttl.
 - field_name: dataset_theme
   label:
     en: Dataset Theme
@@ -385,36 +384,618 @@ dataset_fields:
     es_419: Tema específico del dataset
   display_property: dcat:theme
   help_text:
-    es: "Categorías temáticas específicas del dataset.Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción."
-    es_AR: "Categorías temáticas específicas del dataset.Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción."
-    es_419: "Categorías temáticas específicas del dataset.Deben usarse los ids de la taxonomía autorizada por la Dirección. La misma se encuentra en construcción."
-    en: "Specific thematic categories of the dataset.Use the ids from the taxonomy defined by the Catalog authority."
+    es: "Categorías temáticas específicas del dataset. Deben usarse los ids de la taxonomía autorizada por la Dirección."
+    es_AR: "Categorías temáticas específicas del dataset. Deben usarse los ids de la taxonomía autorizada por la Dirección."
+    es_419: "Categorías temáticas específicas del dataset. Deben usarse los ids de la taxonomía autorizada por la Dirección."
+    en: "Specific thematic categories of the dataset. Use the ids from the taxonomy defined by the Catalog authority."
   help_inline: true
   required: true
   preset: multiple_select
+  display_snippet: multiple_choice_link.html
   form_include_blank_choice: true
   sorted_choices: true
   choices:
-    - value: Tema específico 1
+    - value: Sin tema específico
       label:
-        en: Specific theme 1
-        es: Tema específico 1
-        es_AR: Tema específico 1
-        es_419: Tema específico 1
+        en: No specific theme
+        es: Sin tema específico
+        es_AR: Sin tema específico
+        es_419: Sin tema específico
 
-    - value: Tema específico 2
+    # THEMES — SOCI (Población y sociedad)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/genero-diversidad
       label:
-        en: Specific theme 2
-        es: Tema específico 2
-        es_AR: Tema específico 2
-        es_419: Tema específico 2
+        en: Gender and sexual diversity
+        es: Género y diversidad sexual
+        es_AR: Género y diversidad sexual
+        es_419: Género y diversidad sexual
 
-    - value: Tema específico 3
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/discapacidad
       label:
-        en: Specific theme 3
-        es: Tema específico 3
-        es_AR: Tema específico 3
-        es_419: Tema específico 3
+        en: Disability
+        es: Discapacidad
+        es_AR: Discapacidad
+        es_419: Discapacidad
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/culto-religion
+      label:
+        en: Religion and worship
+        es: Culto y religión
+        es_AR: Culto y religión
+        es_419: Culto y religión
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/demografia-poblacion
+      label:
+        en: Demography and population
+        es: Demografía y población
+        es_AR: Demografía y población
+        es_419: Demografía y población
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/pueblos-originarios
+      label:
+        en: Indigenous peoples
+        es: Pueblos originarios
+        es_AR: Pueblos originarios
+        es_419: Pueblos originarios
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/migracion-naturalizacion
+      label:
+        en: Migration and naturalization
+        es: Migración y naturalización
+        es_AR: Migración y naturalización
+        es_419: Migración y naturalización
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/condiciones-habitacionales
+      label:
+        en: Housing conditions
+        es: Condiciones habitacionales
+        es_AR: Condiciones habitacionales
+        es_419: Condiciones habitacionales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/pobreza-desigualdad
+      label:
+        en: Poverty and inequality
+        es: Pobreza y desigualdad
+        es_AR: Pobreza y desigualdad
+        es_419: Pobreza y desigualdad
+
+    # THEMES — ENVI (Medio ambiente)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/contaminacion-calidad
+      label:
+        en: Pollution and environmental quality
+        es: Contaminación y calidad ambiental
+        es_AR: Contaminación y calidad ambiental
+        es_419: Contaminación y calidad ambiental
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/residuos-basurales
+      label:
+        en: Waste and dumps
+        es: Residuos y basurales
+        es_AR: Residuos y basurales
+        es_419: Residuos y basurales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/sustentabilidad
+      label:
+        en: Sustainability
+        es: Sustentabilidad
+        es_AR: Sustentabilidad
+        es_419: Sustentabilidad
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/biodiversidad-recursos-naturales
+      label:
+        en: Biodiversity and natural resources
+        es: Biodiversidad y recursos naturales
+        es_AR: Biodiversidad y recursos naturales
+        es_419: Biodiversidad y recursos naturales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/areas-protegidas
+      label:
+        en: Protected areas
+        es: Áreas protegidas
+        es_AR: Áreas protegidas
+        es_419: Áreas protegidas
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/suelo-degradacion-tierras
+      label:
+        en: Soil and land degradation
+        es: Suelo y degradación de tierras
+        es_AR: Suelo y degradación de tierras
+        es_419: Suelo y degradación de tierras
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/meteorologia
+      label:
+        en: Meteorology
+        es: Meteorología
+        es_AR: Meteorología
+        es_419: Meteorología
+
+    # THEMES — ECON (Economía y finanzas)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/infraestructura-obras-publicas
+      label:
+        en: Infrastructure and public works
+        es: Infraestructura y obras públicas
+        es_AR: Infraestructura y obras públicas
+        es_419: Infraestructura y obras públicas
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/prestaciones-sociales
+      label:
+        en: Social benefits
+        es: Prestaciones sociales
+        es_AR: Prestaciones sociales
+        es_419: Prestaciones sociales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/presupuesto
+      label:
+        en: Budget
+        es: Presupuesto
+        es_AR: Presupuesto
+        es_419: Presupuesto
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/cuentas-nacionales
+      label:
+        en: National accounts
+        es: Cuentas nacionales
+        es_AR: Cuentas nacionales
+        es_419: Cuentas nacionales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/precios
+      label:
+        en: Prices
+        es: Precios
+        es_AR: Precios
+        es_419: Precios
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/sector-primario
+      label:
+        en: Primary sector
+        es: Sector primario
+        es_AR: Sector primario
+        es_419: Sector primario
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/sector-secundario
+      label:
+        en: Secondary sector
+        es: Sector secundario
+        es_AR: Sector secundario
+        es_419: Sector secundario
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/sector-terciario
+      label:
+        en: Tertiary sector
+        es: Sector terciario
+        es_AR: Sector terciario
+        es_419: Sector terciario
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/sector-cuarto
+      label:
+        en: Foreign trade
+        es: Comercio exterior
+        es_AR: Comercio exterior
+        es_419: Comercio exterior
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/mercado-laboral-ingresos
+      label:
+        en: Labor market and income
+        es: Mercado laboral e ingresos
+        es_AR: Mercado laboral e ingresos
+        es_419: Mercado laboral e ingresos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/deuda-publica
+      label:
+        en: Public debt
+        es: Deuda pública
+        es_AR: Deuda pública
+        es_419: Deuda pública
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/mercado-financiero
+      label:
+        en: Financial market
+        es: Mercado financiero
+        es_AR: Mercado financiero
+        es_419: Mercado financiero
+
+    # THEMES — TRAN (Transporte)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/transporte-publico-urbano
+      label:
+        en: Urban public transport
+        es: Transporte público urbano
+        es_AR: Transporte público urbano
+        es_419: Transporte público urbano
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/aviacion-aeropuertos
+      label:
+        en: Aviation and airports
+        es: Aviación y aeropuertos
+        es_AR: Aviación y aeropuertos
+        es_419: Aviación y aeropuertos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/transporte-maritimo-fluvial-puertos
+      label:
+        en: Maritime and river transport, ports
+        es: Transporte marítimo, fluvial y puertos
+        es_AR: Transporte marítimo, fluvial y puertos
+        es_419: Transporte marítimo, fluvial y puertos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/ferrocarriles
+      label:
+        en: Railways
+        es: Ferrocarriles
+        es_AR: Ferrocarriles
+        es_419: Ferrocarriles
+
+    # THEMES — ENER (Energía)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/hidrocarburos-combustibles-fosiles
+      label:
+        en: Hydrocarbons and fossil fuels
+        es: Hidrocarburos y combustibles fósiles
+        es_AR: Hidrocarburos y combustibles fósiles
+        es_419: Hidrocarburos y combustibles fósiles
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/energia-electrica
+      label:
+        en: Electric energy
+        es: Energía eléctrica
+        es_AR: Energía eléctrica
+        es_419: Energía eléctrica
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/energia-hidroelectrica
+      label:
+        en: Hydroelectric energy
+        es: Energía hidroeléctrica
+        es_AR: Energía hidroeléctrica
+        es_419: Energía hidroeléctrica
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/energias-renovables
+      label:
+        en: Renewable energies
+        es: Energías renovables
+        es_AR: Energías renovables
+        es_419: Energías renovables
+
+    # THEMES — JUST (Justicia y seguridad)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/estadisticas-criminales
+      label:
+        en: Crime statistics
+        es: Estadísticas criminales
+        es_AR: Estadísticas criminales
+        es_419: Estadísticas criminales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/canales-denuncia
+      label:
+        en: Reporting channels
+        es: Canales y líneas de denuncia
+        es_AR: Canales y líneas de denuncia
+        es_419: Canales y líneas de denuncia
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/tramites-registro-automotor
+      label:
+        en: Automotive registry procedures
+        es: Trámites y registro automotor
+        es_AR: Trámites y registro automotor
+        es_419: Trámites y registro automotor
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/servicio-penitenciario
+      label:
+        en: Penitentiary service
+        es: Servicio penitenciario
+        es_AR: Servicio penitenciario
+        es_419: Servicio penitenciario
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/centros-tribunales-justicia
+      label:
+        en: Justice centers and courts
+        es: Centros y tribunales de justicia
+        es_AR: Centros y tribunales de justicia
+        es_419: Centros y tribunales de justicia
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/administracion-justicia
+      label:
+        en: Justice administration
+        es: Administración de la justicia
+        es_AR: Administración de la justicia
+        es_419: Administración de la justicia
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/derechos-humanos
+      label:
+        en: Human rights
+        es: Derechos humanos
+        es_AR: Derechos humanos
+        es_419: Derechos humanos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/violencia-genero
+      label:
+        en: Gender violence
+        es: Violencia de género
+        es_AR: Violencia de género
+        es_419: Violencia de género
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/elecciones
+      label:
+        en: Elections
+        es: Elecciones
+        es_AR: Elecciones
+        es_419: Elecciones
+
+    # THEMES — GOVE (Gobierno y sector público)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/compras-contrataciones
+      label:
+        en: Purchases and contracting
+        es: Compras y contrataciones
+        es_AR: Compras y contrataciones
+        es_419: Compras y contrataciones
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/rendicion-cuentas
+      label:
+        en: Accountability
+        es: Rendición de cuentas
+        es_AR: Rendición de cuentas
+        es_419: Rendición de cuentas
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/personal-estado
+      label:
+        en: State personnel
+        es: Personal del Estado
+        es_AR: Personal del Estado
+        es_419: Personal del Estado
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/inmuebles-estado
+      label:
+        en: State properties
+        es: Inmuebles del Estado
+        es_AR: Inmuebles del Estado
+        es_419: Inmuebles del Estado
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/gobierno-abierto
+      label:
+        en: Open government
+        es: Gobierno abierto
+        es_AR: Gobierno abierto
+        es_419: Gobierno abierto
+
+    # THEMES — AGRI (Agroganadería, pesca y forestación)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/lacteos
+      label:
+        en: Dairy
+        es: Lácteos
+        es_AR: Lácteos
+        es_419: Lácteos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/agricultura
+      label:
+        en: Agriculture
+        es: Agricultura
+        es_AR: Agricultura
+        es_419: Agricultura
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/ganaderia
+      label:
+        en: Livestock
+        es: Ganadería
+        es_AR: Ganadería
+        es_419: Ganadería
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/pesca
+      label:
+        en: Fishing
+        es: Pesca
+        es_AR: Pesca
+        es_419: Pesca
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/vitivinicultura
+      label:
+        en: Viticulture
+        es: Vitivinicultura
+        es_AR: Vitivinicultura
+        es_419: Vitivinicultura
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/apicultura
+      label:
+        en: Apiculture
+        es: Apicultura
+        es_AR: Apicultura
+        es_419: Apicultura
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/horticultura
+      label:
+        en: Horticulture
+        es: Horticultura
+        es_AR: Horticultura
+        es_419: Horticultura
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/agroindustria
+      label:
+        en: Agroindustry
+        es: Agroindustria
+        es_AR: Agroindustria
+        es_419: Agroindustria
+
+    # THEMES — HEAL (Salud)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/medicamentos
+      label:
+        en: Medicines
+        es: Medicamentos
+        es_AR: Medicamentos
+        es_419: Medicamentos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/vigilancia-epidemiologica
+      label:
+        en: Epidemiological surveillance
+        es: Vigilancia epidemiológica
+        es_AR: Vigilancia epidemiológica
+        es_419: Vigilancia epidemiológica
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/vacunacion
+      label:
+        en: Vaccination
+        es: Vacunación
+        es_AR: Vacunación
+        es_419: Vacunación
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/estadisticas-vitales
+      label:
+        en: Vital statistics
+        es: Estadísticas vitales
+        es_AR: Estadísticas vitales
+        es_419: Estadísticas vitales
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/recursos-humanos-salud
+      label:
+        en: Health human resources
+        es: Recursos humanos en salud
+        es_AR: Recursos humanos en salud
+        es_419: Recursos humanos en salud
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/salud-sexual-reproductiva
+      label:
+        en: Sexual and reproductive health
+        es: Salud sexual y reproductiva
+        es_AR: Salud sexual y reproductiva
+        es_419: Salud sexual y reproductiva
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/obras-sociales-prepagas
+      label:
+        en: Health insurance and prepaid medicine
+        es: Obras sociales y prepagas
+        es_AR: Obras sociales y prepagas
+        es_419: Obras sociales y prepagas
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/establecimientos-salud
+      label:
+        en: Health establishments
+        es: Establecimientos de salud
+        es_AR: Establecimientos de salud
+        es_419: Establecimientos de salud
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/especialidades-tratamientos
+      label:
+        en: Medical specialties and treatments
+        es: Especialidades y tratamientos médicos
+        es_AR: Especialidades y tratamientos médicos
+        es_419: Especialidades y tratamientos médicos
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/trasplantes-donaciones
+      label:
+        en: Transplants and donations
+        es: Trasplantes y donaciones
+        es_AR: Trasplantes y donaciones
+        es_419: Trasplantes y donaciones
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/adicciones-consumo-problematico
+      label:
+        en: Addictions and problematic consumption
+        es: Adicciones y consumo problemático
+        es_AR: Adicciones y consumo problemático
+        es_419: Adicciones y consumo problemático
+
+    # THEMES — EDUC (Educación, cultura y deportes)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/educacion
+      label:
+        en: Education
+        es: Educación
+        es_AR: Educación
+        es_419: Educación
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/evaluacion-educativa
+      label:
+        en: Educational evaluation
+        es: Evaluación educativa
+        es_AR: Evaluación educativa
+        es_419: Evaluación educativa
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/cultura
+      label:
+        en: Culture
+        es: Cultura
+        es_AR: Cultura
+        es_419: Cultura
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/deportes
+      label:
+        en: Sports
+        es: Deportes
+        es_AR: Deportes
+        es_419: Deportes
+
+    # THEMES — TECH (Ciencia y tecnología)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/acceso-uso-tics
+      label:
+        en: ICT access and use
+        es: Acceso y uso de TIC
+        es_AR: Acceso y uso de TIC
+        es_419: Acceso y uso de TIC
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/ciencia-tecnologia
+      label:
+        en: Science and research
+        es: Ciencia e investigación
+        es_AR: Ciencia e investigación
+        es_419: Ciencia e investigación
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/infraestructura-digital
+      label:
+        en: Digital infrastructure
+        es: Infraestructura digital
+        es_AR: Infraestructura digital
+        es_419: Infraestructura digital
+
+    # THEMES — TERRI (Territorio)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/division-territorial
+      label:
+        en: Territorial division
+        es: División territorial
+        es_AR: División territorial
+        es_419: División territorial
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/ecosistemas
+      label:
+        en: Ecosystems
+        es: Ecosistemas
+        es_AR: Ecosistemas
+        es_419: Ecosistemas
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/geologia
+      label:
+        en: Geology
+        es: Geología
+        es_AR: Geología
+        es_419: Geología
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/hidrografia
+      label:
+        en: Hydrography
+        es: Hidrografía
+        es_AR: Hidrografía
+        es_419: Hidrografía
+
+    # THEMES — INTR (Asuntos internacionales)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/diplomacia
+      label:
+        en: Diplomacy
+        es: Diplomacia
+        es_AR: Diplomacia
+        es_419: Diplomacia
+
+    # THEMES — DEFE (Defensa)
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/fuerzas-armadas
+      label:
+        en: Armed Forces
+        es: Fuerzas Armadas
+        es_AR: Fuerzas Armadas
+        es_419: Fuerzas Armadas
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/soberania-proteccion-vigilancia
+      label:
+        en: Sovereignty, protection and surveillance
+        es: Soberanía, protección y vigilancia
+        es_AR: Soberanía, protección y vigilancia
+        es_419: Soberanía, protección y vigilancia
+
+    - value: https://infra.datos.gob.ar/vocabulario/temas-datos-gob-ar/riesgos-desastres
+      label:
+        en: Risks and disasters
+        es: Riesgos y desastres
+        es_AR: Riesgos y desastres
+        es_419: Riesgos y desastres
 
 
 
